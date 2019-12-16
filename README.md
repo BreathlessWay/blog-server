@@ -1,4 +1,13 @@
-## QuickStart
+### 个人博客
+
+> Git
+
+1. git config -l: 查看 git 的相关配置
+2. git config user.name/user.email: 修改提交 git 仓库的用户信息
+3. git branch `name`: 查看/创建分支
+4. git push origin `branch name`: 提交分支到远程
+
+> Node
 
 ### Development
 
@@ -27,20 +36,6 @@ $ npm start
 
 - Node.js 8.x
 - Typescript 2.8+
-
-### 个人博客
-
-> Git
-
-1. git config -l: 查看 git 的相关配置
-2. git config user.name/user.email: 修改提交 git 仓库的用户信息
-3. git branch `name`: 查看/创建分支
-4. git push origin `branch name`: 提交分支到远程
-
-> Node
-
-1. nconf: 根据环境使用相关配置文件
-2. morgan: http 请求日志
 
 > Nginx
 
