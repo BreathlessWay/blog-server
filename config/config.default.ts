@@ -8,7 +8,11 @@ export default (appInfo: EggAppInfo) => {
   config.keys = appInfo.name + "_1576490696679_2138";
 
   // add your egg config in here
-  config.middleware = ["robot"];
+  config.middleware = ["robot", "compress"];
+
+  config.compress = {
+    threshold: 2048
+  };
 
   // 应用本身的配置
   const bizConfig = {

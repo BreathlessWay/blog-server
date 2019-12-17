@@ -20,7 +20,8 @@
 		"autod": "autod",
 		"lint": "tslint --project . -c tslint.json --fix",
 		"clean": "ets clean",
-		"tree": "echo '```' > tree.md && tree >> tree.md -I 'node_modules' -F"
+		"tree": "echo '```' > tree.md && tree >> tree.md -I 'node_modules' -F",
+		"start:prod": "EGG_SERVER_ENV=prod npm start"
 	},
 	"husky": {
 		"hooks": {
@@ -31,11 +32,13 @@
 	"dependencies": {
 		"egg": "^2.6.1",
 		"egg-scripts": "^2.6.0",
+		"koa-compress": "^3.0.0",
 		"moment": "^2.24.0"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^8.2.0",
 		"@commitlint/config-conventional": "^8.2.0",
+		"@types/koa-compress": "^2.0.9",
 		"@types/mocha": "^5.2.7",
 		"@types/node": "^12.12.18",
 		"@types/supertest": "^2.0.0",
