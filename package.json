@@ -18,25 +18,26 @@
 		"tsc": "ets && tsc -p tsconfig.json",
 		"ci": "npm run lint && npm run cov && npm run tsc",
 		"autod": "autod",
-		"lint": "tslint --project . -c tslint.json",
+		"lint": "tslint --project . -c tslint.json --fix",
 		"clean": "ets clean",
 		"tree": "echo '```' > tree.md && tree >> tree.md -I 'node_modules' -F"
 	},
 	"husky": {
 		"hooks": {
 			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-			"pre-commit": "pretty-quick --staged"
+			"pre-commit": "npm run lint"
 		}
 	},
 	"dependencies": {
 		"egg": "^2.6.1",
-		"egg-scripts": "^2.6.0"
+		"egg-scripts": "^2.6.0",
+		"moment": "^2.24.0"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^8.2.0",
 		"@commitlint/config-conventional": "^8.2.0",
-		"@types/mocha": "^2.2.40",
-		"@types/node": "^7.0.12",
+		"@types/mocha": "^5.2.7",
+		"@types/node": "^12.12.18",
 		"@types/supertest": "^2.0.0",
 		"autod": "^3.0.1",
 		"autod-egg": "^1.1.0",
@@ -45,11 +46,12 @@
 		"egg-mock": "^3.16.0",
 		"husky": "^3.1.0",
 		"prettier": "^1.19.1",
-		"pretty-quick": "^2.0.1",
 		"tslib": "^1.9.0",
 		"tslint": "^5.0.0",
 		"tslint-config-egg": "^1.0.0",
-		"typescript": "^3.0.0"
+		"tslint-config-prettier": "^1.18.0",
+		"tslint-plugin-prettier": "^2.0.1",
+		"typescript": "^3.7.3"
 	},
 	"engines": {
 		"node": ">=8.9.0"
