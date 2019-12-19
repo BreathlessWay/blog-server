@@ -19,6 +19,10 @@ export default app => {
   //   console.log(ctx);
   //   // log total cost
   // });
+
+  app.messenger.on("agent_action", data => {
+    console.log(data);
+  });
 };
 
 declare module "egg" {

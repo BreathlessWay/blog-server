@@ -1,5 +1,4 @@
 import { EggPlugin } from "egg";
-import { join } from "path";
 
 export const plugin: EggPlugin = {
   static: true,
@@ -7,9 +6,13 @@ export const plugin: EggPlugin = {
   //   enable: true,
   //   package: 'egg-view-nunjucks',
   // },
-  ua: {
+  validate: {
     enable: true,
-    path: join(__dirname, "../lib/plugin/egg-ua")
+    package: "egg-validate"
+  },
+  logrotator: {
+    enable: true,
+    package: "egg-logrotator"
   }
 };
 

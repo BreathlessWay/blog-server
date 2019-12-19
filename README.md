@@ -58,3 +58,5 @@ $ npm start
 > 图片上传
 
 1. [图壳](https://juejin.im/post/5df6d7bf6fb9a0160c412051)
+
+2. [egg上传文件](https://eggjs.org/zh-cn/basics/controller.html#%E8%8E%B7%E5%8F%96%E4%B8%8A%E4%BC%A0%E7%9A%84%E6%96%87%E4%BB%B6)
