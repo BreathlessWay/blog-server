@@ -26,7 +26,7 @@
 	"husky": {
 		"hooks": {
 			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-			"pre-commit": "npm run lint"
+			"pre-commit": "pretty-quick --staged"
 		}
 	},
 	"dependencies": {
@@ -56,11 +56,10 @@
 		"egg-mock": "^3.16.0",
 		"husky": "^3.1.0",
 		"prettier": "^1.19.1",
+		"pretty-quick": "^2.0.1",
 		"tslib": "^1.9.0",
 		"tslint": "^5.0.0",
 		"tslint-config-egg": "^1.0.0",
-		"tslint-config-prettier": "^1.18.0",
-		"tslint-plugin-prettier": "^2.0.1",
 		"typescript": "^3.7.3"
 	},
 	"engines": {

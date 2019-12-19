@@ -13,9 +13,12 @@
 │   ├── middleware/
 │   │   ├── compress.ts
 │   │   ├── error_handler.ts
+│   │   ├── jwt.ts
 │   │   ├── notfound_handler.ts
 │   │   ├── robot.ts
 │   │   └── uppercase.ts
+│   ├── model/
+│   │   └── user.ts
 │   ├── public/
 │   ├── router.ts
 │   ├── schedule/
@@ -41,21 +44,11 @@
 ├── run/
 │   ├── agent_config.json
 │   ├── agent_config_meta.json
-│   ├── agent_timing_66996.json
+│   ├── agent_timing_70957.json
 │   ├── application_config.json
 │   ├── application_config_meta.json
-│   ├── application_timing_66997.json
-│   ├── application_timing_67006.json
-│   ├── application_timing_67016.json
-│   ├── application_timing_67026.json
-│   ├── application_timing_67033.json
-│   ├── application_timing_67041.json
-│   ├── application_timing_67049.json
-│   ├── application_timing_67056.json
-│   ├── application_timing_67349.json
-│   ├── application_timing_67359.json
-│   ├── application_timing_67371.json
-│   ├── application_timing_67373.json
+│   ├── application_timing_70961.json
+│   ├── application_timing_70985.json
 │   └── router.json
 ├── test/
 │   └── app/
@@ -76,6 +69,8 @@
     │   ├── index.d.ts
     │   ├── middleware/
     │   │   └── index.d.ts
+    │   ├── model/
+    │   │   └── index.d.ts
     │   └── service/
     │       └── index.d.ts
     ├── config/
@@ -83,4 +78,5 @@
     │   └── plugin.d.ts
     └── index.d.ts
 
-23 directories, 59 files
+25 directories, 52 files
+```
