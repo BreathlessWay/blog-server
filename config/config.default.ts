@@ -8,7 +8,7 @@ export default (appInfo: EggAppInfo) => {
   config.keys = appInfo.name + "_1576490696679_2138";
 
   // add your egg config in here
-  config.middleware = ["robot", "compress", "notfoundHandler", "errorHandler"];
+  config.middleware = ["robot", "compress", "notfoundHandler", "errorHandler", "jwt"];
 
   config.compress = {
     threshold: 2048
@@ -57,8 +57,18 @@ export default (appInfo: EggAppInfo) => {
       ctx.status = 500;
     }
   };
+
   // 应用本身的配置
   const bizConfig = {
+    mongoose: {
+      client: {
+        url: "mongodb://127.0.0.1/example",
+        options: {}
+      }
+    },
+    jwt: {
+      secret: "_1576490696679_2138"
+    },
     robot: {
       ua: [/Baiduspider/i]
     },

@@ -13,6 +13,10 @@ export const plugin: EggPlugin = {
   logrotator: {
     enable: true,
     package: "egg-logrotator"
+  },
+  mongoose: {
+    enable: true,
+    package: "egg-mongoose"
   }
 };
 

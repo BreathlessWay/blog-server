@@ -33,8 +33,10 @@
 		"cheerio": "^1.0.0-rc.3",
 		"egg": "^2.6.1",
 		"egg-logrotator": "^3.1.0",
+		"egg-mongoose": "^3.2.0",
 		"egg-scripts": "^2.6.0",
 		"egg-validate": "^2.0.2",
+		"jsonwebtoken": "^8.5.1",
 		"koa-compress": "^3.0.0",
 		"moment": "^2.24.0"
 	},
@@ -42,6 +44,7 @@
 		"@commitlint/cli": "^8.2.0",
 		"@commitlint/config-conventional": "^8.2.0",
 		"@types/cheerio": "^0.22.15",
+		"@types/jsonwebtoken": "^8.3.5",
 		"@types/koa-compress": "^2.0.9",
 		"@types/mocha": "^5.2.7",
 		"@types/node": "^12.12.18",
