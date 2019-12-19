@@ -8,7 +8,13 @@ export default (appInfo: EggAppInfo) => {
   config.keys = appInfo.name + "_1576490696679_2138";
 
   // add your egg config in here
-  config.middleware = ["robot", "compress", "notfoundHandler", "errorHandler", "jwt"];
+  config.middleware = [
+    "robot",
+    "compress",
+    "notfoundHandler",
+    "errorHandler",
+    "jwt"
+  ];
 
   config.compress = {
     threshold: 2048
