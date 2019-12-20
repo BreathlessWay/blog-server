@@ -8,8 +8,8 @@
 		"declarations": true
 	},
 	"scripts": {
-		"start": "egg-scripts start --daemon --title=egg-server-blog-server",
-		"stop": "egg-scripts stop --title=egg-server-blog-server",
+		"start": "egg-scripts start --daemon --title=blog-server",
+		"stop": "egg-scripts stop --title=blog-server",
 		"dev": "egg-bin dev",
 		"debug": "egg-bin debug",
 		"test-local": "egg-bin test",
@@ -21,7 +21,8 @@
 		"lint": "tslint --project . -c tslint.json --fix",
 		"clean": "ets clean",
 		"tree": "echo '```' > tree.md && tree >> tree.md -I 'node_modules' -F",
-		"start:prod": "EGG_SERVER_ENV=prod npm start"
+		"start:prod": "EGG_SERVER_ENV=prod npm start",
+		"deploy": "npm run tsc && npm run start:prod"
 	},
 	"husky": {
 		"hooks": {

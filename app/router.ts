@@ -7,10 +7,5 @@ export default (app: Application) => {
 
 	router.post('/', controller.home.create);
 
-	router.get(
-		'news',
-		'/news/:id',
-		app.middleware.uppercase(),
-		controller.news.list,
-	);
+	router.get('news', '/news/:id', controller.news.list);
 };

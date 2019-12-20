@@ -4,6 +4,7 @@
 ├── agent.ts
 ├── app/
 │   ├── constants/
+│   │   └── requestMethod.ts
 │   ├── controller/
 │   │   ├── home.ts
 │   │   └── news.ts
@@ -15,8 +16,7 @@
 │   │   ├── error_handler.ts
 │   │   ├── jwt.ts
 │   │   ├── notfound_handler.ts
-│   │   ├── robot.ts
-│   │   └── uppercase.ts
+│   │   └── robot.ts
 │   ├── model/
 │   │   └── user.ts
 │   ├── public/
@@ -44,11 +44,10 @@
 ├── run/
 │   ├── agent_config.json
 │   ├── agent_config_meta.json
-│   ├── agent_timing_70957.json
+│   ├── agent_timing_14730.json
 │   ├── application_config.json
 │   ├── application_config_meta.json
-│   ├── application_timing_70961.json
-│   ├── application_timing_70985.json
+│   ├── application_timing_14739.json
 │   └── router.json
 ├── test/
 │   └── app/
@@ -78,5 +77,5 @@
     │   └── plugin.d.ts
     └── index.d.ts
 
-25 directories, 52 files
+25 directories, 51 files
 ```

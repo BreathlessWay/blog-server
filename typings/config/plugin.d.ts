@@ -16,24 +16,22 @@ import 'egg-jsonp';
 import 'egg-view';
 import 'egg-validate';
 import 'egg-mongoose';
-import 'egg-jwt';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
-  interface EggPlugin {
-    onerror?: EggPluginItem;
-    session?: EggPluginItem;
-    i18n?: EggPluginItem;
-    watcher?: EggPluginItem;
-    multipart?: EggPluginItem;
-    security?: EggPluginItem;
-    development?: EggPluginItem;
-    logrotator?: EggPluginItem;
-    schedule?: EggPluginItem;
-    static?: EggPluginItem;
-    jsonp?: EggPluginItem;
-    view?: EggPluginItem;
-    validate?: EggPluginItem;
-    mongoose?: EggPluginItem;
-    jwt?: EggPluginItem;
-  }
+	interface EggPlugin {
+		onerror?: EggPluginItem;
+		session?: EggPluginItem;
+		i18n?: EggPluginItem;
+		watcher?: EggPluginItem;
+		multipart?: EggPluginItem;
+		security?: EggPluginItem;
+		development?: EggPluginItem;
+		logrotator?: EggPluginItem;
+		schedule?: EggPluginItem;
+		static?: EggPluginItem;
+		jsonp?: EggPluginItem;
+		view?: EggPluginItem;
+		validate?: EggPluginItem;
+		mongoose?: EggPluginItem;
+	}
 }
