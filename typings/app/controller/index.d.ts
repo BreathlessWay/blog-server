@@ -2,12 +2,14 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
-import ExportHome from '../../../app/controller/home';
+import ExportLogin from '../../../app/controller/login';
 import ExportNews from '../../../app/controller/news';
+import ExportSoup from '../../../app/controller/soup';
 
 declare module 'egg' {
-  interface IController {
-    home: ExportHome;
-    news: ExportNews;
-  }
+	interface IController {
+		login: ExportLogin;
+		news: ExportNews;
+		soup: ExportSoup;
+	}
 }
