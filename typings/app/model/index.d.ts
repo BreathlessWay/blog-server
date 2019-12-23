@@ -5,7 +5,7 @@ import 'egg';
 import ExportUser from '../../../app/model/user';
 
 declare module 'egg' {
-	type MongooseModels = {
-		User: ExportUser;
-	};
+	interface IModel {
+		User: ReturnType<typeof ExportUser>;
+	}
 }

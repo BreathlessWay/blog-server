@@ -6,26 +6,62 @@ export default class LoginController extends BaseController {
 		try {
 			const { email } = ctx.query;
 			if (!ctx.helper.isEmail(email)) {
-				this.fail({ msg: '不是正确的邮箱账号！' });
+				this.fail({ code: 200, msg: '不是正确的邮箱账号！' });
 				return;
 			}
 			const isRegister = await service.login.isRegister();
 			if (!isRegister) {
-				this.success({ msg: '该账号尚未注册！' });
+				this.fail({ code: 200, msg: '该账号尚未注册！' });
 				return;
 			}
-			const code = ctx.helper.random(1000, 9999);
-			await ctx.sendEmail({
-				receiveEmail: email,
-				data: {
-					text: `您的登陆验证码是 ${code}`,
-				},
-			});
+			await service.login.sendCode({ email });
 			this.success({ msg: '验证码发送成功！' });
 		} catch (e) {
 			this.fail({
-				code: 500,
 				msg: '验证码发送失败！',
+				error: e,
+			});
+		}
+	}
+
+	public async register() {
+		try {
+			const {
+				service: { login },
+			} = this;
+			await login.register();
+			this.success({
+				msg: '注册成功！',
+			});
+		} catch (e) {
+			this.fail({
+				msg: '注册失败！',
+				error: e,
+			});
+		}
+	}
+
+	public async login() {
+		try {
+			const { service } = this;
+			const token = await service.login.login();
+			if (token) {
+				this.success({
+					msg: '登陆成功！',
+					data: {
+						token,
+					},
+				});
+			} else {
+				this.fail({
+					code: 200,
+					msg: '验证码错误！',
+				});
+			}
+		} catch (e) {
+			this.fail({
+				msg: '登陆失败！',
+				error: e,
 			});
 		}
 	}

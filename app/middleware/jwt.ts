@@ -56,7 +56,6 @@ export default (options: { secret: string; whileList: string[] }): any => {
 			}
 		} catch (e) {
 			ctx.handleError({
-				code: 500,
 				msg: e.message,
 			});
 		}

@@ -53,9 +53,11 @@ export default {
 		{
 			code = 401,
 			msg,
+			error,
 		}: {
 			code?: number;
 			msg: string;
+			error?: Error;
 		},
 	) {
 		this.status = code;
@@ -63,6 +65,6 @@ export default {
 			success: false,
 			msg: msg,
 		};
-		this.logger.error(msg);
+		this.logger.error(error || msg);
 	},
 };

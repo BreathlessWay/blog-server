@@ -20,7 +20,7 @@ export default (appInfo: EggAppInfo) => {
 
 	config.security = {
 		csrf: {
-			headerName: 'x-csrf-token', // 通过 header 传递 CSRF token 的默认字段为 x-csrf-token
+			headerName: 'X-XSRF-TOKEN', // 通过 header 传递 CSRF token 的默认字段为 x-csrf-token
 		},
 	};
 	// 开启此模式后，应用就默认自己处于反向代理之后，会支持通过解析约定的请求头来获取用户真实的 IP，协议和域名。
@@ -63,7 +63,9 @@ export default (appInfo: EggAppInfo) => {
 		mongoose: {
 			client: {
 				url: 'mongodb://127.0.0.1/blog-server',
-				options: {},
+				options: {
+					useFindAndModify: false,
+				},
 			},
 		},
 		jwt: {
