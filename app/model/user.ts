@@ -1,12 +1,15 @@
-import { Application } from "egg";
+import 'egg';
 
-export default (app: Application) => {
-  const { Schema, model } = app.mongoose;
+import { Application } from 'egg';
 
-  const UserSchema = new Schema({
-    userName: { type: String },
-    password: { type: String }
-  });
+const UserModel = (app: Application) => {
+	const { Schema, model } = app.mongoose;
 
-  return model("User", UserSchema);
+	const UserSchema = new Schema({
+		email: { type: String },
+	});
+
+	return model('User', UserSchema);
 };
+
+export default UserModel;

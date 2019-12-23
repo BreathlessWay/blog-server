@@ -6,10 +6,13 @@ export default {
 		this: Context,
 		{
 			receiveEmail,
-			code,
+			data,
 		}: {
 			receiveEmail: string;
-			code: number;
+			data: {
+				text?: string;
+				html?: string;
+			};
 		},
 	) {
 		if (!this.helper.isEmail(receiveEmail)) {
@@ -26,20 +29,40 @@ export default {
 		});
 
 		const mailOptions = {
-			from: '"BreathlessWay" <654560329@qq.com>', // sender address
+			from: `"博客管理后台" <654560329@qq.com>`, // sender address
 			to: receiveEmail, // list of receivers
 			subject: '博客管理后台验证码', // Subject line
 			// 发送text或者html格式
-			text: `您的登陆验证码是 ${code}`, // html body
+			...data,
 		};
 
 		// send mail with defined transport object
-		transporter.sendMail(mailOptions, (error, info) => {
-			if (error) {
-				this.logger.error(error);
-				return;
-			}
-			this.logger.info(info);
+		return new Promise((resolve, reject) => {
+			transporter.sendMail(mailOptions, (error, info) => {
+				if (error) {
+					this.logger.error(error);
+					reject(error);
+				}
+				this.logger.info(info);
+				resolve(info);
+			});
 		});
+	},
+	handleError(
+		this: Context,
+		{
+			code = 401,
+			msg,
+		}: {
+			code?: number;
+			msg: string;
+		},
+	) {
+		this.status = code;
+		this.body = {
+			success: false,
+			msg: msg,
+		};
+		this.logger.error(msg);
 	},
 };

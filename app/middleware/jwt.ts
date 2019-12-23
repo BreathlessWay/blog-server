@@ -17,7 +17,10 @@ export default (options: { secret: string; whileList: string[] }): any => {
 			if (options.whileList.includes(ctx.path)) {
 				await next();
 			} else {
-				ctx.throw(401, '未登录，请先登录！');
+				ctx.handleError({
+					msg: '尚未登录，请先登录！',
+				});
+				return;
 			}
 			return;
 		}
@@ -25,25 +28,37 @@ export default (options: { secret: string; whileList: string[] }): any => {
 		try {
 			// 验证当前token
 			const decode = JWT.verify(token, options.secret) as {
-				userName: string;
+				email: string;
 				expire: number;
 			};
-			if (!decode || !decode.userName) {
-				ctx.throw(401, '没有权限！');
+			if (!decode || !decode.email) {
+				ctx.handleError({
+					msg: '没有权限！',
+				});
+				return;
 			}
 			if (Date.now() - decode.expire > 0) {
-				ctx.throw(401, '登陆已过期，请重新登录！');
+				ctx.handleError({
+					msg: '登陆已过期，请重新登录！',
+				});
+				return;
 			}
 			const user = await ctx.model.User.find({
-				userName: decode.userName,
+				email: decode.email,
 			});
 			if (user) {
 				await next();
 			} else {
-				ctx.throw('401', '用户信息验证失败！');
+				ctx.handleError({
+					msg: '用户信息验证失败，请重新登录！',
+				});
+				return;
 			}
 		} catch (e) {
-			ctx.logger.error(e);
+			ctx.handleError({
+				code: 500,
+				msg: e.message,
+			});
 		}
 	};
 };

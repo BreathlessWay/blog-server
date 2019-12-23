@@ -8,7 +8,7 @@ export default (appInfo: EggAppInfo) => {
 	config.keys = appInfo.name + '_1576490696679_2138';
 
 	// add your egg config in here
-	config.middleware = ['compress', 'notfoundHandler', 'errorHandler', 'jwt'];
+	config.middleware = ['errorHandler', 'notfoundHandler', 'jwt', 'compress'];
 
 	config.compress = {
 		threshold: 2048,
@@ -62,13 +62,13 @@ export default (appInfo: EggAppInfo) => {
 	const bizConfig = {
 		mongoose: {
 			client: {
-				url: 'mongodb://127.0.0.1/example',
+				url: 'mongodb://127.0.0.1/blog-server',
 				options: {},
 			},
 		},
 		jwt: {
 			secret: '_1576490696679_2138',
-			whileList: ['/login', '/register'],
+			whileList: ['/login', '/register', '/code', '/soup'],
 		},
 	};
 	// the return config will combines to EggAppConfig

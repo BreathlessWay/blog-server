@@ -3,7 +3,6 @@ import * as moment from 'moment';
 moment.locale('zh');
 
 export default {
-	relativeTime: (time: Date) => moment(new Date(time)).fromNow(),
 	random(min, max): number {
 		return Math.floor(Math.random() * (max - min)) + min;
 	},
