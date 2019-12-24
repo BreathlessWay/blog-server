@@ -21,11 +21,11 @@ export default class BaseController extends Controller {
 
 	public fail({
 		code = 500,
-		msg,
+		msg = '服务器错误！',
 		error,
 	}: {
 		code?: number;
-		msg: string;
+		msg?: string;
 		error?: Error;
 	}) {
 		const { ctx } = this;

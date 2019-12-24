@@ -2,6 +2,9 @@ import { Application } from 'egg';
 
 export default (app: Application) => {
 	const { controller, router } = app;
+
+	router.get('/valid', controller.login.validLogin);
+
 	router.get('/code', controller.login.getCode);
 
 	router.post('/register', controller.login.register);

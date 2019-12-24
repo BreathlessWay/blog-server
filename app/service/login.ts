@@ -1,5 +1,9 @@
 import { Service } from 'egg';
 import * as JWT from 'jsonwebtoken';
+import * as moment from 'moment';
+import { createHash } from 'crypto';
+
+import { CODE_EXPIRES_TIME, TOKEN_EXPIRES_TIME } from '../constants';
 
 export default class LoginService extends Service {
 	public async isRegister() {
@@ -10,7 +14,8 @@ export default class LoginService extends Service {
 
 	public async sendCode({ email }: { email: string }) {
 		const { ctx } = this;
-		const code = ctx.helper.random(1000, 9999);
+		const md5 = createHash('md5');
+		const code = ctx.helper.randomCode();
 		await ctx.sendEmail({
 			receiveEmail: email,
 			data: {
@@ -23,7 +28,8 @@ export default class LoginService extends Service {
 			},
 			{
 				$set: {
-					code,
+					code: md5.update(code).digest('hex'),
+					code_expires: moment().add(CODE_EXPIRES_TIME, 'minute'),
 				},
 			},
 		);
@@ -42,8 +48,13 @@ export default class LoginService extends Service {
 	public async login() {
 		const { ctx } = this;
 		const { email, code } = ctx.request.body;
-		const user = await ctx.model.User.findOne({ email, code });
-		if (user) {
+		const md5 = createHash('md5');
+		const user = await ctx.model.User.findOne({
+			email,
+			code: md5.update(code).digest('hex'),
+		});
+		let toke = '';
+		if (user && user.code_expires > Date.now()) {
 			await ctx.model.User.findOneAndUpdate(
 				{
 					email,
@@ -51,13 +62,15 @@ export default class LoginService extends Service {
 				{
 					$unset: {
 						code: '',
+						code_expires: '',
 					},
 				},
 			);
-			return JWT.sign({ user: user.email }, this.config.jwt.secret, {
-				expiresIn: 60,
+			toke = JWT.sign({ email: user.email }, this.config.jwt.secret, {
+				algorithm: 'HS256',
+				expiresIn: TOKEN_EXPIRES_TIME,
 			});
 		}
-		return '';
+		return toke;
 	}
 }

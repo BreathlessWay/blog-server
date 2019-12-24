@@ -1,7 +1,10 @@
 import { Context } from 'egg';
 import * as nodemailer from 'nodemailer';
+import * as JWT from 'jsonwebtoken';
+import * as Qs from 'qs';
+import { JWT_SECRET } from '../constants';
 
-export default {
+const context = {
 	sendEmail(
 		this: Context,
 		{
@@ -60,11 +63,59 @@ export default {
 			error?: Error;
 		},
 	) {
-		this.status = code;
+		this.status = Number(code);
 		this.body = {
 			success: false,
 			msg: msg,
 		};
 		this.logger.error(error || msg);
 	},
+	async valid(this: Context) {
+		const token = this.request.header.authorization;
+		if (token) {
+			const decode = JWT.verify(token.split(' ')[1], JWT_SECRET) as {
+				email: string;
+				exp: number;
+			};
+
+			if (!decode || !decode.email) {
+				throw new Error(
+					Qs.stringify({
+						code: 401,
+						msg: '没有权限！',
+					}),
+				);
+			}
+
+			if (Date.now() > decode.exp * 1000) {
+				throw new Error(
+					Qs.stringify({
+						code: 401,
+						msg: '登陆已过期，请重新登录！',
+					}),
+				);
+			}
+
+			const user = await this.model.User.find({
+				email: decode.email,
+			});
+			if (!user) {
+				throw new Error(
+					Qs.stringify({
+						code: 401,
+						msg: '用户信息验证失败，请重新登录！',
+					}),
+				);
+			}
+		} else {
+			throw new Error(
+				Qs.stringify({
+					code: 401,
+					msg: 'token不存在！',
+				}),
+			);
+		}
+	},
 };
+
+export default context;

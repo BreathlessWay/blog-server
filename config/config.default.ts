@@ -1,4 +1,5 @@
 import { Context, EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
+import { JWT_SECRET } from '../app/constants';
 
 export default (appInfo: EggAppInfo) => {
 	const config = {} as PowerPartial<EggAppConfig>;
@@ -69,7 +70,7 @@ export default (appInfo: EggAppInfo) => {
 			},
 		},
 		jwt: {
-			secret: '_1576490696679_2138',
+			secret: JWT_SECRET,
 			whileList: ['/login', '/register', '/code', '/soup'],
 		},
 	};

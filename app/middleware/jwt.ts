@@ -1,6 +1,6 @@
-import * as JWT from 'jsonwebtoken';
 import { Context } from 'egg';
 import { RequestMethod } from '../constants/requestMethod';
+import * as Qs from 'qs';
 
 export default (options: { secret: string; whileList: string[] }): any => {
 	return async (ctx: Context, next) => {
@@ -24,39 +24,15 @@ export default (options: { secret: string; whileList: string[] }): any => {
 			}
 			return;
 		}
-		// 当前token值存在
 		try {
-			// 验证当前token
-			const decode = JWT.verify(token, options.secret) as {
-				email: string;
-				expire: number;
-			};
-			if (!decode || !decode.email) {
-				ctx.handleError({
-					msg: '没有权限！',
-				});
-				return;
-			}
-			if (Date.now() - decode.expire > 0) {
-				ctx.handleError({
-					msg: '登陆已过期，请重新登录！',
-				});
-				return;
-			}
-			const user = await ctx.model.User.find({
-				email: decode.email,
-			});
-			if (user) {
-				await next();
-			} else {
-				ctx.handleError({
-					msg: '用户信息验证失败，请重新登录！',
-				});
-				return;
-			}
+			await ctx.valid();
+			await next();
 		} catch (e) {
+			const { code = 500, msg = e.message } = Qs.parse(e.message);
 			ctx.handleError({
-				msg: e.message,
+				code,
+				msg,
+				error: e,
 			});
 		}
 	};
