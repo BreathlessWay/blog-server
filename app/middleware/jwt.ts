@@ -1,8 +1,7 @@
 import { Context } from 'egg';
 import { RequestMethod } from '../constants/requestMethod';
-import * as Qs from 'qs';
 
-export default (options: { secret: string; whileList: string[] }): any => {
+export default (): any => {
 	return async (ctx: Context, next) => {
 		// 拿到传会数据的header 中的token值
 		const token = ctx.request.header.authorization;
@@ -14,24 +13,25 @@ export default (options: { secret: string; whileList: string[] }): any => {
 		}
 		// 当前token值不存在的时候
 		if (!token) {
-			if (options.whileList.includes(ctx.path)) {
-				await next();
-			} else {
-				ctx.handleError({
-					msg: '尚未登录，请先登录！',
-				});
-				return;
-			}
+			ctx.handleError({
+				msg: '尚未登录，请先登录！',
+			});
 			return;
 		}
 		try {
-			await ctx.valid();
-			await next();
+			const res = await ctx.valid();
+			if (res.success) {
+				await next();
+			} else {
+				ctx.handleError({
+					code: res.code,
+					msg: res.msg,
+					error: new Error(res.msg),
+				});
+			}
 		} catch (e) {
-			const { code = 500, msg = e.message } = Qs.parse(e.message);
 			ctx.handleError({
-				code,
-				msg,
+				msg: e.message,
 				error: e,
 			});
 		}

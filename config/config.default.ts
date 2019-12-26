@@ -9,7 +9,7 @@ export default (appInfo: EggAppInfo) => {
 	config.keys = appInfo.name + '_1576490696679_2138';
 
 	// add your egg config in here
-	config.middleware = ['errorHandler', 'notfoundHandler', 'jwt', 'compress'];
+	config.middleware = ['errorHandler', 'notfoundHandler', 'compress'];
 
 	config.compress = {
 		threshold: 2048,
@@ -71,7 +71,6 @@ export default (appInfo: EggAppInfo) => {
 		},
 		jwt: {
 			secret: JWT_SECRET,
-			whileList: ['/login', '/register', '/code', '/soup'],
 		},
 	};
 	// the return config will combines to EggAppConfig

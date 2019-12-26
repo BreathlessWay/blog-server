@@ -19,7 +19,7 @@ export default class LoginService extends Service {
 		await ctx.sendEmail({
 			receiveEmail: email,
 			data: {
-				text: `您的登陆验证码是 ${code}`,
+				text: `您的登录验证码是 ${code}`,
 			},
 		});
 		await ctx.model.User.findOneAndUpdate(
@@ -66,7 +66,7 @@ export default class LoginService extends Service {
 					},
 				},
 			);
-			toke = JWT.sign({ email: user.email }, this.config.jwt.secret, {
+			toke = JWT.sign({ userId: user._id }, this.config.jwt.secret, {
 				algorithm: 'HS256',
 				expiresIn: TOKEN_EXPIRES_TIME,
 			});

@@ -1,7 +1,6 @@
 import { Context } from 'egg';
 import * as nodemailer from 'nodemailer';
 import * as JWT from 'jsonwebtoken';
-import * as Qs from 'qs';
 import { JWT_SECRET } from '../constants';
 
 const context = {
@@ -71,49 +70,51 @@ const context = {
 		this.logger.error(error || msg);
 	},
 	async valid(this: Context) {
-		const token = this.request.header.authorization;
-		if (token) {
-			const decode = JWT.verify(token.split(' ')[1], JWT_SECRET) as {
-				email: string;
-				exp: number;
-			};
+		const errorBase = {
+			success: false,
+			code: 401,
+		};
 
-			if (!decode || !decode.email) {
-				throw new Error(
-					Qs.stringify({
-						code: 401,
+		try {
+			const token = this.request.header.authorization;
+			if (token) {
+				const decode = JWT.verify(token.split(' ')[1], JWT_SECRET) as {
+					userId: string;
+					exp: number;
+				};
+				if (!decode || !decode.userId) {
+					return {
+						...errorBase,
 						msg: '没有权限！',
-					}),
-				);
-			}
+					};
+				}
 
-			if (Date.now() > decode.exp * 1000) {
-				throw new Error(
-					Qs.stringify({
-						code: 401,
-						msg: '登陆已过期，请重新登录！',
-					}),
-				);
-			}
-
-			const user = await this.model.User.find({
-				email: decode.email,
-			});
-			if (!user) {
-				throw new Error(
-					Qs.stringify({
-						code: 401,
+				const user = await this.model.User.find({
+					userId: decode.userId,
+				});
+				if (!user) {
+					return {
+						...errorBase,
 						msg: '用户信息验证失败，请重新登录！',
-					}),
-				);
-			}
-		} else {
-			throw new Error(
-				Qs.stringify({
-					code: 401,
+					};
+				}
+			} else {
+				return {
+					...errorBase,
 					msg: 'token不存在！',
-				}),
-			);
+				};
+			}
+
+			return {
+				code: 200,
+				success: true,
+				msg: '登录验证成功！',
+			};
+		} catch (e) {
+			return {
+				...errorBase,
+				msg: e.message,
+			};
 		}
 	},
 };

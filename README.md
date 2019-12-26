@@ -12,6 +12,7 @@
 1. [egg](https://eggjs.org/zh-cn/intro/)
 2. egg 不支持 typescript 别名？？？
 3. [nodemailer](https://nodemailer.com/about/), node 的邮件发送
+4. [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken), 登录验证
 
 > Nginx
 

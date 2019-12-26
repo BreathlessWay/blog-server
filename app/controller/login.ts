@@ -1,7 +1,5 @@
 import BaseController from './BaseController';
 
-import * as Qs from 'qs';
-
 export default class LoginController extends BaseController {
 	public async getCode() {
 		const { ctx, service } = this;
@@ -49,7 +47,7 @@ export default class LoginController extends BaseController {
 			const token = await service.login.login();
 			if (token) {
 				this.success({
-					msg: '登陆成功！',
+					msg: '登录成功！',
 					data: {
 						token,
 					},
@@ -62,7 +60,7 @@ export default class LoginController extends BaseController {
 			}
 		} catch (e) {
 			this.fail({
-				msg: '登陆失败！',
+				msg: '登录失败！',
 				error: e,
 			});
 		}
@@ -71,15 +69,21 @@ export default class LoginController extends BaseController {
 	public async validLogin() {
 		try {
 			const { ctx } = this;
-			await ctx.valid();
-			this.success({
-				msg: '登陆验证成功！',
-			});
+			const res = await ctx.valid();
+			if (res.success) {
+				this.success({
+					msg: res.msg,
+				});
+			} else {
+				this.fail({
+					code: res.code,
+					msg: res.msg,
+					error: new Error(res.msg),
+				});
+			}
 		} catch (e) {
-			const { code = 500, msg = e.message } = Qs.parse(e.message);
 			this.fail({
-				code,
-				msg,
+				msg: e.message,
 				error: e,
 			});
 		}
