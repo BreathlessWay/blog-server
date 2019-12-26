@@ -6,7 +6,6 @@ import { Application } from 'egg';
 
 export interface IUserModel extends Document {
 	email: string;
-	create_at: number;
 	code: string;
 	code_expires: number;
 	menu: string;

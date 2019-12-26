@@ -13,6 +13,8 @@ export default (app: Application) => {
 
 	router.get('/menu', controller.menu.getMenu);
 
+	router.put('/menu', app.middleware.jwt(), controller.menu.updateMenu);
+
 	router.get('/soup', controller.soup.index);
 
 	router.get('news', '/news/:id', controller.news.list);

@@ -4,7 +4,6 @@ import { Application } from 'egg';
 import { EMenuType } from '../constants/menu';
 
 export interface IMenuModel extends Document {
-	userId: string;
 	list: Array<{
 		name: string;
 		type: EMenuType;

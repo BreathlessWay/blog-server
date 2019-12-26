@@ -1,33 +1,37 @@
 import BaseController from './BaseController';
-import { baseRoute } from '../constants/menu';
 
 export default class MenuController extends BaseController {
 	public async getMenu() {
 		try {
-			const { ctx } = this;
-			let menuResult = await ctx.model.Menu.findOne();
-			if (menuResult) {
-				this.success({
-					msg: '获取菜单项成功',
-					data: {
-						result: menuResult,
-					},
-				});
-			} else {
-				const menu = new ctx.model.Menu({
-					list: baseRoute,
-				});
-				await menu.save();
-				this.success({
-					msg: '获取菜单项成功',
-					data: {
-						result: menu,
-					},
-				});
-			}
+			const { service } = this;
+			const menuResult = await service.menu.getMenuList();
+			this.success({
+				msg: '获取菜单项成功',
+				data: {
+					result: menuResult,
+				},
+			});
 		} catch (e) {
 			this.fail({
 				msg: '获取菜单项失败！',
+				error: e,
+			});
+		}
+	}
+
+	public async updateMenu() {
+		try {
+			const { service } = this;
+			const updateResult = await service.menu.updateMenu();
+			this.success({
+				msg: '更新菜单项成功',
+				data: {
+					result: updateResult,
+				},
+			});
+		} catch (e) {
+			this.fail({
+				msg: '更新菜单项失败！',
 				error: e,
 			});
 		}
