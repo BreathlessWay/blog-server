@@ -9,6 +9,6 @@ export default class SoupService extends Service {
 			const $ = cheerio.load(res.data);
 			return $('#sentence').text();
 		}
-		ctx.logger.error('毒鸡汤网站抓取失败！');
+		return '';
 	}
 }

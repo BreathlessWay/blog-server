@@ -1,10 +1,25 @@
-import { Controller } from 'egg';
+import BaseController from './BaseController';
 
-export default class SoupController extends Controller {
+export default class SoupController extends BaseController {
 	public async index() {
 		try {
-			const { service, ctx } = this;
-			ctx.body = await service.soup.getSoup();
-		} catch (e) {}
+			const { service } = this;
+			const res = await service.soup.getSoup();
+			if (res) {
+				this.success({
+					msg: '获取毒鸡汤成功！',
+					data: {
+						result: res,
+					},
+				});
+			} else {
+				throw new Error();
+			}
+		} catch (e) {
+			this.fail({
+				msg: '获取毒鸡汤失败！',
+				error: e,
+			});
+		}
 	}
 }

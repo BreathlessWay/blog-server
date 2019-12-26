@@ -13,6 +13,7 @@
 2. egg 不支持 typescript 别名？？？
 3. [nodemailer](https://nodemailer.com/about/), node 的邮件发送
 4. [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken), 登录验证
+5. egg-mongoose 的类型生成有问题, 需要自己手动 declare
 
 > Nginx
 

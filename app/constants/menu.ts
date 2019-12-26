@@ -9,7 +9,7 @@ export enum EMenuType {
 
 export const baseRoute = [
 	{
-		name: '首1页',
+		name: '首页',
 		type: EMenuType.home,
 		show: true,
 		onlyAdmin: false,

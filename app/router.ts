@@ -2,7 +2,7 @@ import { Application } from 'egg';
 
 export default (app: Application) => {
 	const { controller, router } = app;
-	// app.middleware.jwt()
+
 	router.get('/valid', controller.login.validLogin);
 
 	router.get('/code', controller.login.getCode);
