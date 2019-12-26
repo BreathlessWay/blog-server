@@ -4,19 +4,21 @@ import { JWT_SECRET } from '../constants';
 
 export default class BaseController extends Controller {
 	get userId() {
-		const { ctx } = this;
-		const token = ctx.request.header.authorization;
+		try {
+			const { ctx } = this;
+			const token = ctx.request.header.authorization;
 
-		if (token) {
-			const decode = JWT.verify(token.split(' ')[1], JWT_SECRET) as {
-				userId: string;
-				exp: number;
-			};
-			if (decode) {
-				return decode.userId;
+			if (token) {
+				const decode = JWT.verify(token.split(' ')[1], JWT_SECRET) as {
+					userId: string;
+					exp: number;
+				};
+				return decode?.userId ?? '';
 			}
+			return '';
+		} catch (e) {
+			return '';
 		}
-		return '';
 	}
 
 	public success({
