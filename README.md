@@ -7,13 +7,14 @@
 3. git branch `name`: 查看/创建分支
 4. git push origin `branch name`: 提交分支到远程
 
-> Node
+> Node/Mongodb
 
 1. [egg](https://eggjs.org/zh-cn/intro/)
 2. egg 不支持 typescript 别名？？？
 3. [nodemailer](https://nodemailer.com/about/), node 的邮件发送
 4. [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken), 登录验证
 5. egg-mongoose 的类型生成有问题, 需要自己手动 declare
+6. [mongoose 深层修改问题](https://cnodejs.org/topic/50dde64ea7e6c6171a80a678): mongoose 在 update 时用\$set 的作用及问题, 以及深层修改的解决方法
 
 > Nginx
 

@@ -2,13 +2,15 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
-import ExportHome from '../../../app/model/home';
+import ExportImage from '../../../app/model/image';
+import ExportLogin from '../../../app/model/login';
 import ExportMenu from '../../../app/model/menu';
 import ExportUser from '../../../app/model/user';
 
 declare module 'egg' {
 	interface IModel {
-		Home: ReturnType<typeof ExportHome>;
+		Image: ReturnType<typeof ExportImage>;
+		Login: ReturnType<typeof ExportLogin>;
 		Menu: ReturnType<typeof ExportMenu>;
 		User: ReturnType<typeof ExportUser>;
 	}

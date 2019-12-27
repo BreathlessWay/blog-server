@@ -40,7 +40,9 @@
 		"jsonwebtoken": "^8.5.1",
 		"koa-compress": "^3.0.0",
 		"moment": "^2.24.0",
-		"nodemailer": "^6.4.2"
+		"mz-modules": "^2.1.0",
+		"nodemailer": "^6.4.2",
+		"uuid": "^3.3.3"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^8.2.0",
@@ -55,6 +57,7 @@
 		"@types/nodemailer": "^6.4.0",
 		"@types/qs": "^6.9.0",
 		"@types/supertest": "^2.0.0",
+		"@types/uuid": "^3.4.6",
 		"autod": "^3.0.1",
 		"autod-egg": "^1.1.0",
 		"egg-bin": "^4.11.0",

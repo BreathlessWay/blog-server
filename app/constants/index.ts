@@ -70,3 +70,5 @@ export const DATA_LIST = [
 export const CODE_LENGTH = 4;
 
 export const JWT_SECRET = '_1576490696679_2138';
+
+export const FILE_BASE_URL = '//localhost:7001/public/';

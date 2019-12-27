@@ -8,7 +8,7 @@ import { CODE_EXPIRES_TIME, TOKEN_EXPIRES_TIME } from '../constants';
 export default class LoginService extends Service {
 	public async isRegister() {
 		const { ctx } = this;
-		const user = await ctx.model.User.find({ email: ctx.query.email });
+		const user = await ctx.model.Login.find({ email: ctx.query.email });
 		return user && user.length > 0;
 	}
 
@@ -22,7 +22,7 @@ export default class LoginService extends Service {
 				text: `您的登录验证码是 ${code}`,
 			},
 		});
-		await ctx.model.User.findOneAndUpdate(
+		await ctx.model.Login.findOneAndUpdate(
 			{
 				email,
 			},
@@ -38,7 +38,7 @@ export default class LoginService extends Service {
 	public async register() {
 		const { ctx } = this;
 		const email = ctx.request.body.email;
-		const user = new ctx.model.User({
+		const user = new ctx.model.Login({
 			email,
 		});
 		await user.save();
@@ -49,13 +49,13 @@ export default class LoginService extends Service {
 		const { ctx } = this;
 		const { email, code } = ctx.request.body;
 		const md5 = createHash('md5');
-		const user = await ctx.model.User.findOne({
+		const user = await ctx.model.Login.findOne({
 			email,
 			code: md5.update(code).digest('hex'),
 		});
 		let toke = '';
 		if (user && user.code_expires > Date.now()) {
-			await ctx.model.User.findOneAndUpdate(
+			await ctx.model.Login.findOneAndUpdate(
 				{
 					email,
 				},

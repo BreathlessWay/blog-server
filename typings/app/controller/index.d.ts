@@ -7,6 +7,8 @@ import ExportLogin from '../../../app/controller/login';
 import ExportMenu from '../../../app/controller/menu';
 import ExportNews from '../../../app/controller/news';
 import ExportSoup from '../../../app/controller/soup';
+import ExportUpload from '../../../app/controller/upload';
+import ExportUser from '../../../app/controller/user';
 
 declare module 'egg' {
 	interface IController {
@@ -15,5 +17,7 @@ declare module 'egg' {
 		menu: ExportMenu;
 		news: ExportNews;
 		soup: ExportSoup;
+		upload: ExportUpload;
+		user: ExportUser;
 	}
 }

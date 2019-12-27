@@ -22,7 +22,9 @@ export default class MenuService extends Service {
 		return ctx.model.Menu.findOneAndUpdate(
 			{},
 			{
-				list,
+				$set: {
+					list,
+				},
 			},
 			{
 				new: true,

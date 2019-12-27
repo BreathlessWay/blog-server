@@ -3,13 +3,15 @@ import { Application } from 'egg';
 
 import { EMenuType } from '../constants/menu';
 
+export interface IMenuItemModel extends Document {
+	name: string;
+	type: EMenuType;
+	show: boolean;
+	onlyAdmin: boolean;
+}
+
 export interface IMenuModel extends Document {
-	list: Array<{
-		name: string;
-		type: EMenuType;
-		show: boolean;
-		onlyAdmin: boolean;
-	}>;
+	list: Array<IMenuItemModel>;
 }
 
 const MenuModel = (app: Application): Model<IMenuModel> => {

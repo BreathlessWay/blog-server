@@ -89,7 +89,7 @@ const context = {
 					};
 				}
 
-				const user = await this.model.User.find({
+				const user = await this.model.Login.find({
 					userId: decode.userId,
 				});
 				if (!user) {

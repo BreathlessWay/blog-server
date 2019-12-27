@@ -15,6 +15,12 @@ export default (app: Application) => {
 
 	router.put('/menu', app.middleware.jwt(), controller.menu.updateMenu);
 
+	router.get('/user', controller.user.getUserDetail);
+
+	router.put('/user', app.middleware.jwt(), controller.user.updateUserDetail);
+
+	router.post('/upload', app.middleware.jwt(), controller.upload.uploadFile);
+
 	router.get('/soup', controller.soup.index);
 
 	router.get('news', '/news/:id', controller.news.list);
