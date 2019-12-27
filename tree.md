@@ -6,13 +6,16 @@
 │   ├── constants/
 │   │   ├── index.ts
 │   │   ├── menu.ts
-│   │   └── requestMethod.ts
+│   │   ├── requestMethod.ts
+│   │   └── user.ts
 │   ├── controller/
 │   │   ├── BaseController.ts
 │   │   ├── login.ts
 │   │   ├── menu.ts
 │   │   ├── news.ts
-│   │   └── soup.ts
+│   │   ├── soup.ts
+│   │   ├── upload.ts
+│   │   └── user.ts
 │   ├── extend/
 │   │   ├── context.ts
 │   │   └── helper.ts
@@ -23,6 +26,8 @@
 │   │   ├── notfound_handler.ts
 │   │   └── robot.ts
 │   ├── model/
+│   │   ├── image.ts
+│   │   ├── login.ts
 │   │   ├── menu.ts
 │   │   ├── model.d.ts
 │   │   └── user.ts
@@ -33,7 +38,9 @@
 │       ├── login.ts
 │       ├── menu.ts
 │       ├── news.ts
-│       └── soup.ts
+│       ├── soup.ts
+│       ├── upload.ts
+│       └── user.ts
 ├── app.ts
 ├── appveyor.yml
 ├── commitlint.config.js
@@ -54,41 +61,22 @@
 ├── run/
 │   ├── agent_config.json
 │   ├── agent_config_meta.json
-│   ├── agent_timing_16868.json
+│   ├── agent_timing_26513.json
 │   ├── application_config.json
 │   ├── application_config_meta.json
-│   ├── application_timing_16870.json
-│   ├── application_timing_16882.json
-│   ├── application_timing_16892.json
-│   ├── application_timing_16895.json
-│   ├── application_timing_16903.json
-│   ├── application_timing_16908.json
-│   ├── application_timing_16914.json
-│   ├── application_timing_16924.json
-│   ├── application_timing_16927.json
-│   ├── application_timing_16928.json
-│   ├── application_timing_16936.json
-│   ├── application_timing_16943.json
-│   ├── application_timing_16947.json
-│   ├── application_timing_16953.json
-│   ├── application_timing_16955.json
-│   ├── application_timing_16964.json
-│   ├── application_timing_16972.json
-│   ├── application_timing_16980.json
-│   ├── application_timing_16987.json
-│   ├── application_timing_16994.json
-│   ├── application_timing_17002.json
-│   ├── application_timing_17013.json
-│   ├── application_timing_17020.json
-│   ├── application_timing_17130.json
-│   ├── application_timing_17133.json
-│   ├── application_timing_17135.json
-│   ├── application_timing_17144.json
-│   ├── application_timing_17146.json
-│   ├── application_timing_17167.json
-│   ├── application_timing_17169.json
-│   ├── application_timing_17172.json
-│   ├── application_timing_17179.json
+│   ├── application_timing_26514.json
+│   ├── application_timing_26531.json
+│   ├── application_timing_26534.json
+│   ├── application_timing_26562.json
+│   ├── application_timing_26566.json
+│   ├── application_timing_26578.json
+│   ├── application_timing_26606.json
+│   ├── application_timing_26626.json
+│   ├── application_timing_26628.json
+│   ├── application_timing_26650.json
+│   ├── application_timing_26660.json
+│   ├── application_timing_26662.json
+│   ├── application_timing_26889.json
 │   └── router.json
 ├── test/
 │   └── app/
@@ -118,5 +106,5 @@
     │   └── plugin.d.ts
     └── index.d.ts
 
-25 directories, 92 files
+25 directories, 80 files
 ```
