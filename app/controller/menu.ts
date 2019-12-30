@@ -21,7 +21,14 @@ export default class MenuController extends BaseController {
 
 	public async updateMenu() {
 		try {
-			const { service } = this;
+			const { service, ctx } = this;
+			const list = ctx.request.body.list;
+
+			if (!list || !Array.isArray(list)) {
+				this.paramsError();
+				return;
+			}
+
 			await service.menu.updateMenu();
 			this.success({
 				msg: '更新菜单项成功',

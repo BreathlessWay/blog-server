@@ -6,7 +6,7 @@ export default class LoginController extends BaseController {
 		try {
 			const { email } = ctx.query;
 			if (!ctx.helper.isEmail(email)) {
-				this.fail({ code: 200, msg: '不是正确的邮箱账号！' });
+				this.paramsError({ msg: '不是正确的邮箱账号！' });
 				return;
 			}
 			const isRegister = await service.login.isRegister();
@@ -27,8 +27,14 @@ export default class LoginController extends BaseController {
 	public async register() {
 		try {
 			const {
+				ctx,
 				service: { login },
 			} = this;
+			const email = ctx.request.body.email;
+			if (!ctx.helper.isEmail(email)) {
+				this.paramsError({ msg: '不是正确的邮箱账号！' });
+				return;
+			}
 			await login.register();
 			this.success({
 				msg: '注册成功！',
@@ -43,7 +49,13 @@ export default class LoginController extends BaseController {
 
 	public async login() {
 		try {
-			const { service } = this;
+			const { service, ctx } = this;
+			const { email, code } = ctx.request.body;
+			if (!ctx.helper.isEmail(email) || !code) {
+				this.paramsError();
+				return;
+			}
+
 			const token = await service.login.login();
 			if (token) {
 				this.success({

@@ -14,6 +14,7 @@
 │   │   ├── menu.ts
 │   │   ├── news.ts
 │   │   ├── soup.ts
+│   │   ├── tag.ts
 │   │   ├── upload.ts
 │   │   └── user.ts
 │   ├── extend/
@@ -30,6 +31,7 @@
 │   │   ├── login.ts
 │   │   ├── menu.ts
 │   │   ├── model.d.ts
+│   │   ├── tag.ts
 │   │   └── user.ts
 │   ├── public/
 │   │   ├── bbb80d90-288e-11ea-923c-0f2789a779b2.jpg
@@ -42,6 +44,7 @@
 │       ├── menu.ts
 │       ├── news.ts
 │       ├── soup.ts
+│       ├── tag.ts
 │       ├── upload.ts
 │       └── user.ts
 ├── app.ts
@@ -102,6 +105,25 @@
 │   ├── application_timing_48758.json
 │   ├── application_timing_48769.json
 │   ├── application_timing_48772.json
+│   ├── application_timing_51721.json
+│   ├── application_timing_51728.json
+│   ├── application_timing_51735.json
+│   ├── application_timing_51741.json
+│   ├── application_timing_51743.json
+│   ├── application_timing_51747.json
+│   ├── application_timing_51753.json
+│   ├── application_timing_51755.json
+│   ├── application_timing_51766.json
+│   ├── application_timing_51923.json
+│   ├── application_timing_51982.json
+│   ├── application_timing_52027.json
+│   ├── application_timing_52029.json
+│   ├── application_timing_52031.json
+│   ├── application_timing_52043.json
+│   ├── application_timing_52045.json
+│   ├── application_timing_52047.json
+│   ├── application_timing_52053.json
+│   ├── application_timing_52070.json
 │   └── router.json
 ├── test/
 │   └── app/
@@ -131,5 +153,5 @@
     │   └── plugin.d.ts
     └── index.d.ts
 
-25 directories, 105 files
+25 directories, 127 files
 ```

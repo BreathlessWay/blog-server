@@ -19,7 +19,14 @@ export default class UserController extends BaseController {
 
 	public async updateUserDetail() {
 		try {
-			const { service } = this;
+			const { service, ctx } = this;
+			const data = ctx.request.body;
+
+			if (!data) {
+				this.paramsError();
+				return;
+			}
+
 			const userDetail = await service.user.updateUserDetail();
 			this.success({
 				msg: '更新用户信息成功！',

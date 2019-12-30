@@ -55,4 +55,11 @@ export default class BaseController extends Controller {
 			error,
 		});
 	}
+
+	public paramsError({ msg }: { msg: string } = { msg: '参数错误！' }) {
+		this.fail({
+			code: 400,
+			msg,
+		});
+	}
 }

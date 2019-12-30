@@ -19,6 +19,10 @@ export default (app: Application) => {
 
 	router.put('/user', app.middleware.jwt(), controller.user.updateUserDetail);
 
+	router.get('/tags', controller.tag.getTagList);
+
+	router.post('/tags', app.middleware.jwt(), controller.tag.editTagList);
+
 	router.post('/upload', app.middleware.jwt(), controller.upload.uploadFile);
 
 	router.get('/soup', controller.soup.index);

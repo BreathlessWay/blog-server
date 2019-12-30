@@ -5,6 +5,7 @@ import 'egg';
 import ExportImage from '../../../app/model/image';
 import ExportLogin from '../../../app/model/login';
 import ExportMenu from '../../../app/model/menu';
+import ExportTag from '../../../app/model/tag';
 import ExportUser from '../../../app/model/user';
 
 declare module 'egg' {
@@ -12,6 +13,7 @@ declare module 'egg' {
 		Image: ReturnType<typeof ExportImage>;
 		Login: ReturnType<typeof ExportLogin>;
 		Menu: ReturnType<typeof ExportMenu>;
+		Tag: ReturnType<typeof ExportTag>;
 		User: ReturnType<typeof ExportUser>;
 	}
 }
