@@ -14,24 +14,29 @@ export default class TagService extends Service {
 
 	public async editTagList() {
 		const { ctx } = this;
-		const list: Array<TagItemType> = ctx.request.body;
+		const list: Array<TagItemType> = ctx.request.body.list;
 
 		const updateList: Array<Partial<TagItemType>> = [],
 			addList: Array<Omit<TagItemType, '_id'>> = [];
 		let deleteList: Array<Partial<TagItemType>> = [];
 
-		const listResult = await ctx.model.Tag.find();
+		const listResult = (await ctx.model.Tag.find()) || [];
+		list.forEach(item => {
+			if (item._id) {
+				listResult.forEach(t => {
+					if (t._id.toString() === item._id) {
+						updateList.push(item);
+					}
+				});
+			} else {
+				addList.push(item);
+			}
+		});
+		const updateListIds = updateList.map(item => item._id);
 		if (listResult && listResult.length) {
-			list.forEach(item => {
-				if (item._id) {
-					const _item = listResult.find(t => t._id === item._id);
-					_item && updateList.push(_item);
-				} else {
-					addList.push(item);
-				}
-			});
-			const updateListIds = updateList.map(item => item._id);
-			deleteList = listResult.filter(item => !updateListIds.includes(item._id));
+			deleteList = listResult.filter(
+				item => !updateListIds.includes(item._id.toString()),
+			);
 		}
 		const updateBatch = updateList.map(item => {
 			return {
@@ -58,10 +63,11 @@ export default class TagService extends Service {
 			};
 		});
 
-		return await ctx.model.Tag.bulkWrite([
+		await ctx.model.Tag.bulkWrite([
 			...updateBatch,
 			...deleteBatch,
 			...addBatch,
 		]);
+		return this.getTagList();
 	}
 }
