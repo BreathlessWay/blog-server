@@ -19,9 +19,19 @@ export default class MenuService extends Service {
 	public async updateMenu() {
 		const { ctx } = this;
 		const list = ctx.request.body.list;
-		const allUpdate = list.map(item =>
-			ctx.model.Menu.findByIdAndUpdate(item._id, { $set: item }, { new: true }),
-		);
-		return Promise.all(allUpdate);
+
+		const allUpdate = list.map(item => {
+			return {
+				updateOne: {
+					filter: { _id: item._id },
+					// If you were using the MongoDB driver directly, you'd need to do
+					// `update: { $set: { title: ... } }` but mongoose adds $set for
+					// you.
+					update: item,
+				},
+			};
+		});
+
+		return ctx.model.Menu.bulkWrite(allUpdate);
 	}
 }
