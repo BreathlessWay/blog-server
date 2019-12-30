@@ -3,21 +3,18 @@ import { Application } from 'egg';
 
 import { EMenuType } from '../constants/menu';
 
-export interface IMenuItemModel extends Document {
+export interface IMenuModel extends Document {
 	name: string;
 	type: EMenuType;
 	show: boolean;
 	onlyAdmin: boolean;
-}
-
-export interface IMenuModel extends Document {
-	list: Array<IMenuItemModel>;
+	sort: number;
 }
 
 const MenuModel = (app: Application): Model<IMenuModel> => {
 	const { Schema, model } = app.mongoose;
 
-	const MenuItemSchema = new Schema(
+	const MenuSchema = new Schema(
 		{
 			name: String,
 			type: {
@@ -33,15 +30,7 @@ const MenuModel = (app: Application): Model<IMenuModel> => {
 			},
 			show: Boolean,
 			onlyAdmin: Boolean,
-		},
-		{
-			_id: false,
-		},
-	);
-
-	const MenuSchema = new Schema(
-		{
-			list: [MenuItemSchema],
+			sort: Number,
 		},
 		{
 			timestamps: true,

@@ -8,7 +8,7 @@ export default class MenuController extends BaseController {
 			this.success({
 				msg: '获取菜单项成功',
 				data: {
-					result: menuResult,
+					list: menuResult,
 				},
 			});
 		} catch (e) {
@@ -26,7 +26,7 @@ export default class MenuController extends BaseController {
 			this.success({
 				msg: '更新菜单项成功',
 				data: {
-					result: updateResult,
+					list: updateResult,
 				},
 			});
 		} catch (e) {
