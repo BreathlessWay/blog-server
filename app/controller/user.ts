@@ -21,7 +21,6 @@ export default class UserController extends BaseController {
 		try {
 			const { service, ctx } = this;
 			const data = ctx.request.body;
-
 			if (!data) {
 				this.paramsError();
 				return;

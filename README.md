@@ -20,6 +20,7 @@
 1. [mongoose 深层修改问题](https://cnodejs.org/topic/50dde64ea7e6c6171a80a678): mongoose 在 update 时用\$set 的作用及问题, 以及深层修改的解决方法
 2. 批量插入使用 Model.insertMany([...])
 3. 批量更新可以循环, 或者使用[bulkWrite](http://www.mongoosejs.net/docs/api.html#bulkwrite_bulkWrite), 会批量执行`insertOne, updateOne, updateMany, replaceOne, deleteOne, and/or deleteMany`操作
+4. 从 mongodb 中查出的数据的\_id 默认是 ObjectId, 需要通过`_id.toSting()`, 转为普通 id
 
 > Nginx
 

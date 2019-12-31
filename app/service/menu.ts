@@ -32,6 +32,7 @@ export default class MenuService extends Service {
 			};
 		});
 
-		return ctx.model.Menu.bulkWrite(allUpdate);
+		await ctx.model.Menu.bulkWrite(allUpdate);
+		return this.getMenuList();
 	}
 }
