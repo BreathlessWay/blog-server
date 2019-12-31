@@ -5,6 +5,7 @@ export interface ITagModel extends Document {
 	name: string;
 	count: number;
 	show: boolean;
+	article: Array<string>;
 }
 
 const TagModel = (app: Application): Model<ITagModel> => {
@@ -12,9 +13,13 @@ const TagModel = (app: Application): Model<ITagModel> => {
 
 	const TagSchema = new Schema(
 		{
-			name: String,
+			name: {
+				type: String,
+				unique: true,
+			},
 			count: Number,
 			show: Boolean,
+			article: [{ type: Schema.Types.ObjectId, ref: 'Article' }],
 		},
 		{
 			timestamps: true,

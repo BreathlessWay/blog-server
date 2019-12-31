@@ -20,7 +20,7 @@
 		"autod": "autod",
 		"lint": "tslint --project . -c tslint.json --fix",
 		"clean": "ets clean",
-		"tree": "echo '```' > tree.md && tree >> tree.md -I 'node_modules' -F",
+		"tree": "echo '```' > tree.md && tree >> tree.md -I 'node_modules|run|logs' -F",
 		"start:prod": "EGG_SERVER_ENV=prod npm start",
 		"deploy": "npm run tsc && npm run start:prod"
 	},

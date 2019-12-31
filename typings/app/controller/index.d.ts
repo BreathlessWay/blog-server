@@ -3,6 +3,7 @@
 
 import 'egg';
 import ExportBaseController from '../../../app/controller/BaseController';
+import ExportArticle from '../../../app/controller/article';
 import ExportLogin from '../../../app/controller/login';
 import ExportMenu from '../../../app/controller/menu';
 import ExportNews from '../../../app/controller/news';
@@ -14,6 +15,7 @@ import ExportUser from '../../../app/controller/user';
 declare module 'egg' {
 	interface IController {
 		baseController: ExportBaseController;
+		article: ExportArticle;
 		login: ExportLogin;
 		menu: ExportMenu;
 		news: ExportNews;

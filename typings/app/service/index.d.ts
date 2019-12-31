@@ -2,6 +2,7 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
+import ExportArticle from '../../../app/service/article';
 import ExportLogin from '../../../app/service/login';
 import ExportMenu from '../../../app/service/menu';
 import ExportNews from '../../../app/service/news';
@@ -12,6 +13,7 @@ import ExportUser from '../../../app/service/user';
 
 declare module 'egg' {
 	interface IService {
+		article: ExportArticle;
 		login: ExportLogin;
 		menu: ExportMenu;
 		news: ExportNews;

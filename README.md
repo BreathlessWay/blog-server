@@ -21,6 +21,7 @@
 2. 批量插入使用 Model.insertMany([...])
 3. 批量更新可以循环, 或者使用[bulkWrite](http://www.mongoosejs.net/docs/api.html#bulkwrite_bulkWrite), 会批量执行`insertOne, updateOne, updateMany, replaceOne, deleteOne, and/or deleteMany`操作
 4. 从 mongodb 中查出的数据的\_id 默认是 ObjectId, 需要通过`_id.toSting()`, 转为普通 id
+5. mongodb 获取当前查询条件下条目总数和获取当前分页需要查询两次
 
 > Nginx
 
