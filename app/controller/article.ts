@@ -68,14 +68,16 @@ export default class ArticleController extends BaseController {
 
 	public async updateArticle() {
 		try {
-			const { ctx } = this;
-			const id = ctx.params.id;
+			const { ctx, service } = this;
+			const id = ctx.params.id,
+				detail = ctx.request.body.detail;
 
-			if (!id) {
+			if (!id || !detail) {
 				this.paramsError();
 				return;
 			}
 
+			await service.article.updateArticleDetail();
 			this.success({
 				msg: '更新文章成功！',
 			});
@@ -89,7 +91,7 @@ export default class ArticleController extends BaseController {
 
 	public async deleteArticle() {
 		try {
-			const { ctx } = this;
+			const { ctx, service } = this;
 			const id = ctx.params.id;
 
 			if (!id) {
@@ -97,6 +99,7 @@ export default class ArticleController extends BaseController {
 				return;
 			}
 
+			await service.article.deleteArticle();
 			this.success({
 				msg: '删除文章成功！',
 			});
@@ -111,9 +114,9 @@ export default class ArticleController extends BaseController {
 	public async batchUpdateArticle() {
 		try {
 			const { ctx } = this;
-			const data = ctx.request.body;
+			const data = ctx.request.body.ids;
 
-			if (!data || !Array.isArray(data.ids) || !data.ids.length) {
+			if (!data || !Array.isArray(data) || !data.length) {
 				this.paramsError();
 				return;
 			}
@@ -132,9 +135,9 @@ export default class ArticleController extends BaseController {
 	public async batchDeleteArticle() {
 		try {
 			const { ctx } = this;
-			const data = ctx.request.body;
+			const data = ctx.request.body.ids;
 
-			if (!data || !Array.isArray(data.ids) || !data.ids.length) {
+			if (!data || !Array.isArray(data) || !data.length) {
 				this.paramsError();
 				return;
 			}

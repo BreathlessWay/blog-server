@@ -16,7 +16,7 @@ const LoginModel = (app: Application): Model<ILoginModel> => {
 
 	const LoginSchema = new Schema(
 		{
-			email: { type: String },
+			email: { type: String, required: true },
 			code: { type: String },
 			code_expires: {
 				type: Date,
