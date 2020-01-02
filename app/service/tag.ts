@@ -11,9 +11,9 @@ export default class TagService extends Service {
 	public async getTagList() {
 		const tagList = await this.ctx.model.Tag.find();
 		return tagList.map(item => {
-			const { article, _id, name, show, createdAt, updatedAt } = item;
+			const { _id, name, show, createdAt, updatedAt, count } = item;
 			return {
-				count: article.length,
+				count,
 				_id,
 				name,
 				show,

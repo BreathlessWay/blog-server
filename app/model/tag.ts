@@ -19,7 +19,6 @@ const TagModel = (app: Application): Model<ITagModel> => {
 				type: String,
 				unique: true,
 			},
-			count: Number,
 			show: Boolean,
 			article: [{ type: Schema.Types.ObjectId, ref: 'Article' }],
 		},
@@ -27,6 +26,10 @@ const TagModel = (app: Application): Model<ITagModel> => {
 			timestamps: true,
 		},
 	);
+
+	TagSchema.virtual('count').get(function(this: ITagModel) {
+		return this.article.length;
+	});
 
 	return model<ITagModel>('Tag', TagSchema);
 };
