@@ -46,7 +46,8 @@ export default class TagService extends Service {
 		const updateListIds = updateList.map(item => item._id);
 		if (listResult && listResult.length) {
 			deleteList = listResult.filter(
-				item => !updateListIds.includes(item._id.toString()),
+				item =>
+					!updateListIds.includes(item._id.toString()) && !item.article.length,
 			);
 		}
 		const updateBatch = updateList.map(item => {
