@@ -74,15 +74,27 @@ export default class ArticleService extends Service {
 		const { ctx } = this,
 			id = ctx.params.id,
 			detail = ctx.request.body.detail;
-		return ctx.model.Article.findByIdAndUpdate(id, { $set: detail });
+
+		await ctx.model.Article.findByIdAndUpdate(id, { $set: detail });
+		const tags = detail.tags;
+		if (Array.isArray(tags)) {
+			await ctx.model.Tag.updateMany({}, { $pull: { article: id } });
+			await ctx.model.Tag.updateMany(
+				{
+					_id: { $in: tags },
+				},
+				{
+					$push: { article: id },
+				},
+			);
+		}
 	}
 
 	public async deleteArticle() {
 		const { ctx } = this;
 		const id = ctx.params.id;
-		// model采用remove
-		// query用delete
-		return ctx.model.Article.findByIdAndRemove(id);
+		await ctx.model.Article.findByIdAndRemove(id);
+		await ctx.model.Tag.updateMany({}, { $pull: { article: id } });
 	}
 
 	public async batchUpdateArticle() {
@@ -98,6 +110,20 @@ export default class ArticleService extends Service {
 	public async batchDeleteArticle() {
 		const { ctx } = this;
 		const { ids } = ctx.request.body;
-		return ctx.model.Article.deleteMany({ _id: { $in: ids } });
+		await ctx.model.Article.deleteMany({ _id: { $in: ids } });
+		const tagList = await ctx.model.Tag.find({});
+
+		tagList.forEach(item => {
+			const { article } = item;
+			ids.forEach(id => {
+				if (article.includes(id)) {
+					item.updateOne({
+						$pull: {
+							article: id,
+						},
+					});
+				}
+			});
+		});
 	}
 }

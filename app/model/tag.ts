@@ -5,6 +5,8 @@ export interface ITagModel extends Document {
 	name: string;
 	count: number;
 	show: boolean;
+	createdAt: string;
+	updatedAt: string;
 	article: Array<string>;
 }
 
