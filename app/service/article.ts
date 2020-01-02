@@ -74,7 +74,6 @@ export default class ArticleService extends Service {
 		const { ctx } = this,
 			id = ctx.params.id,
 			detail = ctx.request.body.detail;
-		console.log(detail);
 		return ctx.model.Article.findByIdAndUpdate(id, { $set: detail });
 	}
 
@@ -84,5 +83,21 @@ export default class ArticleService extends Service {
 		// model采用remove
 		// query用delete
 		return ctx.model.Article.findByIdAndRemove(id);
+	}
+
+	public async batchUpdateArticle() {
+		const { ctx } = this;
+		const { ids, status } = ctx.request.body;
+
+		return ctx.model.Article.updateMany(
+			{ _id: { $in: ids } },
+			{ $set: { status } },
+		);
+	}
+
+	public async batchDeleteArticle() {
+		const { ctx } = this;
+		const { ids } = ctx.request.body;
+		return ctx.model.Article.deleteMany({ _id: { $in: ids } });
 	}
 }

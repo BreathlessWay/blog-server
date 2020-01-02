@@ -113,7 +113,7 @@ export default class ArticleController extends BaseController {
 
 	public async batchUpdateArticle() {
 		try {
-			const { ctx } = this;
+			const { ctx, service } = this;
 			const data = ctx.request.body.ids;
 
 			if (!data || !Array.isArray(data) || !data.length) {
@@ -121,6 +121,7 @@ export default class ArticleController extends BaseController {
 				return;
 			}
 
+			await service.article.batchUpdateArticle();
 			this.success({
 				msg: '批量更新文章成功！',
 			});
@@ -134,14 +135,14 @@ export default class ArticleController extends BaseController {
 
 	public async batchDeleteArticle() {
 		try {
-			const { ctx } = this;
+			const { ctx, service } = this;
 			const data = ctx.request.body.ids;
 
 			if (!data || !Array.isArray(data) || !data.length) {
 				this.paramsError();
 				return;
 			}
-
+			await service.article.batchDeleteArticle();
 			this.success({
 				msg: '删除文章成功！',
 			});
