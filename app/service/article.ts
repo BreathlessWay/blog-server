@@ -111,19 +111,19 @@ export default class ArticleService extends Service {
 		const { ctx } = this;
 		const { ids } = ctx.request.body;
 		await ctx.model.Article.deleteMany({ _id: { $in: ids } });
-		const tagList = await ctx.model.Tag.find({});
-
-		tagList.forEach(item => {
-			const { article } = item;
-			ids.forEach(id => {
-				if (article.includes(id)) {
-					item.updateOne({
-						$pull: {
-							article: id,
-						},
-					});
-				}
-			});
-		});
+		// const tagList = await ctx.model.Tag.find({});
+		//
+		// tagList.forEach(item => {
+		// 	const { article, _id } = item;
+		// 	ids.forEach(id => {
+		// 		if (article.includes(id)) {
+		// 			ctx.model.Tag.findByIdAndUpdate(_id, {
+		// 				$pull: {
+		// 					article: id,
+		// 				},
+		// 			});
+		// 		}
+		// 	});
+		// });
 	}
 }
