@@ -36,6 +36,8 @@
 │   │   ├── tag.ts
 │   │   └── user.ts
 │   ├── public/
+│   │   ├── 3a1ebf50-2d3d-11ea-a501-a353b58dc52d.jpg
+│   │   ├── 4ab17420-2d3d-11ea-a501-a353b58dc52d.jpeg
 │   │   ├── b1d1b4e0-2b75-11ea-a969-2dfbdeda1851.jpg
 │   │   ├── bbb80d90-288e-11ea-923c-0f2789a779b2.jpg
 │   │   ├── cea77710-288e-11ea-923c-0f2789a779b2.jpg
@@ -44,7 +46,6 @@
 │   │   ├── e75c1100-2b75-11ea-a969-2dfbdeda1851.jpg
 │   │   └── fc8564f0-2b75-11ea-a969-2dfbdeda1851.jpeg
 │   ├── router.ts
-│   ├── schedule/
 │   └── service/
 │       ├── article.ts
 │       ├── login.ts
@@ -56,7 +57,6 @@
 │       └── user.ts
 ├── app.ts
 ├── appveyor.yml
-├── commitlint.config.js
 ├── config/
 │   ├── config.default.ts
 │   ├── config.local.ts
@@ -92,5 +92,5 @@
     │   └── plugin.d.ts
     └── index.d.ts
 
-22 directories, 69 files
+21 directories, 70 files
 ```
