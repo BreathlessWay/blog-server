@@ -57,6 +57,7 @@
 │       └── user.ts
 ├── app.ts
 ├── appveyor.yml
+├── commitlint.config.js
 ├── config/
 │   ├── config.default.ts
 │   ├── config.local.ts
@@ -92,5 +93,5 @@
     │   └── plugin.d.ts
     └── index.d.ts
 
-21 directories, 70 files
+21 directories, 71 files
 ```
