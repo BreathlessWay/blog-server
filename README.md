@@ -14,6 +14,7 @@
 3. [nodemailer](https://nodemailer.com/about/), node 的邮件发送
 4. [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken), 登录验证
 5. egg-mongoose 的类型生成有问题, 需要自己手动 declare
+6. 把入参放到service是不符合controller\service\model这样的设计, 应该在controller获取query/params/body, 作为参数传入service
 
 > Mongodb/Mongoose
 
