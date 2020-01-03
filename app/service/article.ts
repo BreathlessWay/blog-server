@@ -71,7 +71,6 @@ export default class ArticleService extends Service {
 	}
 
 	public async updateArticleDetail(userId) {
-		console.log(userId);
 		const { ctx } = this,
 			id = ctx.params.id,
 			detail = ctx.request.body.detail;
