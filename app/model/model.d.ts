@@ -6,6 +6,7 @@ import { IUserModel } from './user';
 import { ITagModel } from './tag';
 import { IArticleModel } from './article';
 import { ICatFigureItemModel } from './catFigure';
+import { ICatListItemModel } from './catList';
 
 declare module 'egg' {
 	interface Context {
@@ -16,6 +17,7 @@ declare module 'egg' {
 			Tag: Model<ITagModel>;
 			Article: Model<IArticleModel>;
 			CatFigure: Model<ICatFigureItemModel>;
+			CatList: Model<ICatListItemModel>;
 		};
 	}
 }

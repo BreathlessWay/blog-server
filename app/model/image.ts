@@ -10,8 +10,14 @@ export interface IImageItemModel extends Document {
 const ImageItemSchema = timestamps => {
 	return new Schema(
 		{
-			title: String,
-			intro: String,
+			title: {
+				type: String,
+				default: '',
+			},
+			intro: {
+				type: String,
+				default: '',
+			},
 			url: {
 				type: String,
 				required: true,

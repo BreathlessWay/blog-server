@@ -55,9 +55,11 @@ export default class BaseController extends Controller {
 		});
 	}
 
-	public clientError({ msg }: { msg: string } = { msg: '参数错误！' }) {
+	public clientError(params: { code?: number; msg?: string } = {}) {
+		const { code = 400, msg = '参数错误！' } = params;
+
 		this.fail({
-			code: 400,
+			code,
 			msg,
 		});
 	}

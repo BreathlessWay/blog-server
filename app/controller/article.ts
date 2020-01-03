@@ -29,16 +29,10 @@ export default class ArticleController extends BaseController {
 			}
 
 			const detail = await service.article.getArticleDetail();
-			if (detail) {
-				this.success({
-					msg: '获取文章详情成功！',
-					data: detail,
-				});
-			} else {
-				this.fail({
-					msg: '文章不存在！',
-				});
-			}
+			this.success({
+				msg: '获取文章详情成功！',
+				data: detail,
+			});
 		} catch (e) {
 			this.fail({
 				msg: '获取文章详情失败！',
@@ -89,7 +83,7 @@ export default class ArticleController extends BaseController {
 					msg: '更新文章成功！',
 				});
 			} else {
-				this.fail({
+				this.clientError({
 					code: 403,
 					msg: '没有修改该文章的权限！',
 				});
@@ -119,7 +113,7 @@ export default class ArticleController extends BaseController {
 					msg: '删除文章成功！',
 				});
 			} else {
-				this.fail({
+				this.clientError({
 					code: 403,
 					msg: '没有删除该文章的权限！',
 				});
@@ -151,7 +145,7 @@ export default class ArticleController extends BaseController {
 					msg: '批量更新文章成功！',
 				});
 			} else {
-				this.fail({
+				this.clientError({
 					code: 403,
 					msg: '部分文章没有修改权限！',
 				});
@@ -168,9 +162,9 @@ export default class ArticleController extends BaseController {
 		const { ctx, service, userId } = this;
 
 		try {
-			const data = ctx.request.body.ids;
+			const { ids } = ctx.queries;
 
-			if (!data || !Array.isArray(data) || !data.length) {
+			if (!ids) {
 				this.clientError();
 				return;
 			}
@@ -184,7 +178,7 @@ export default class ArticleController extends BaseController {
 					msg: '删除文章成功！',
 				});
 			} else {
-				this.fail({
+				this.clientError({
 					code: 403,
 					msg: '部分文章没有删除权限！',
 				});

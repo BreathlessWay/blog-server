@@ -1,6 +1,8 @@
 import { Service } from 'egg';
 import * as Qs from 'qs';
 
+import { BASE_PAGE_SIZE } from '../constants';
+
 export default class ArticleService extends Service {
 	public async getArticleList() {
 		const { ctx } = this;
@@ -11,7 +13,7 @@ export default class ArticleService extends Service {
 			status,
 			tags,
 			pageIndex = 1,
-			pageSize = 10,
+			pageSize = BASE_PAGE_SIZE,
 		} = Qs.parse(ctx.querystring);
 		const params: any = {};
 		if (startTime && endTime) {
@@ -132,7 +134,8 @@ export default class ArticleService extends Service {
 
 	public async batchDeleteArticle(userId) {
 		const { ctx } = this;
-		const { ids } = ctx.request.body;
+		const ids = JSON.parse(ctx.query.ids);
+
 		const matchArticleCount = await ctx.model.Article.countDocuments({
 			_id: { $in: ids },
 			userId,

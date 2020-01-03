@@ -64,8 +64,7 @@ export default class LoginController extends BaseController {
 					},
 				});
 			} else {
-				this.fail({
-					code: 200,
+				this.clientError({
 					msg: '验证码错误！',
 				});
 			}

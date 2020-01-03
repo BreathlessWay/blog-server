@@ -51,7 +51,7 @@ export default (app: Application) => {
 		controller.article.batchUpdateArticle,
 	);
 
-	router.put(
+	router.delete(
 		'/batch/delete/article',
 		app.middleware.jwt(),
 		controller.article.batchDeleteArticle,
@@ -75,6 +75,34 @@ export default (app: Application) => {
 		'/cat/figure/:id',
 		app.middleware.jwt(),
 		controller.cat.deleteCatFigure,
+	);
+
+	router.get('/cat/list', controller.cat.getCatList);
+
+	router.post('/cat/list', app.middleware.jwt(), controller.cat.createCatList);
+
+	router.put(
+		'/cat/list/:id',
+		app.middleware.jwt(),
+		controller.cat.updateCatInfo,
+	);
+
+	router.delete(
+		'/cat/list/:id',
+		app.middleware.jwt(),
+		controller.cat.deleteCatItem,
+	);
+
+	router.put(
+		'/cat/list',
+		app.middleware.jwt(),
+		controller.cat.batchChangeCatInfo,
+	);
+
+	router.delete(
+		'/cat/list',
+		app.middleware.jwt(),
+		controller.cat.batchDeleteCatItem,
 	);
 
 	router.post('/upload', app.middleware.jwt(), controller.upload.uploadFile);
