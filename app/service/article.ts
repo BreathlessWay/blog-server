@@ -67,7 +67,11 @@ export default class ArticleService extends Service {
 		const { ctx } = this,
 			id = ctx.params.id;
 
-		return ctx.model.Article.findById(id);
+		return ctx.model.Article.findByIdAndUpdate(
+			id,
+			{ $inc: { visit: 1 } },
+			{ new: true },
+		);
 	}
 
 	public async updateArticleDetail(userId) {

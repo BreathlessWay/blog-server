@@ -2,22 +2,22 @@ import BaseController from './BaseController';
 
 export default class LoginController extends BaseController {
 	public async getCode() {
-		const { ctx, service } = this;
+		const { ctx, service, paramsError, success, fail } = this;
 		try {
 			const { email } = ctx.query;
 			if (!ctx.helper.isEmail(email)) {
-				this.paramsError({ msg: '不是正确的邮箱账号！' });
+				paramsError({ msg: '不是正确的邮箱账号！' });
 				return;
 			}
 			const isRegister = await service.login.isRegister();
 			if (!isRegister) {
-				this.fail({ code: 200, msg: '该账号尚未注册！' });
+				fail({ code: 200, msg: '该账号尚未注册！' });
 				return;
 			}
 			await service.login.sendCode({ email });
-			this.success({ msg: '验证码发送成功！' });
+			success({ msg: '验证码发送成功！' });
 		} catch (e) {
-			this.fail({
+			fail({
 				msg: '验证码发送失败！',
 				error: e,
 			});
@@ -25,22 +25,20 @@ export default class LoginController extends BaseController {
 	}
 
 	public async register() {
+		const { ctx, service, paramsError, success, fail } = this;
+
 		try {
-			const {
-				ctx,
-				service: { login },
-			} = this;
 			const email = ctx.request.body.email;
 			if (!ctx.helper.isEmail(email)) {
-				this.paramsError({ msg: '不是正确的邮箱账号！' });
+				paramsError({ msg: '不是正确的邮箱账号！' });
 				return;
 			}
-			await login.register();
-			this.success({
+			await service.login.register();
+			success({
 				msg: '注册成功！',
 			});
 		} catch (e) {
-			this.fail({
+			fail({
 				msg: '注册失败！',
 				error: e,
 			});
@@ -48,30 +46,31 @@ export default class LoginController extends BaseController {
 	}
 
 	public async login() {
+		const { ctx, service, paramsError, success, fail } = this;
+
 		try {
-			const { service, ctx } = this;
 			const { email, code } = ctx.request.body;
 			if (!ctx.helper.isEmail(email) || !code) {
-				this.paramsError();
+				paramsError();
 				return;
 			}
 
 			const token = await service.login.login();
 			if (token) {
-				this.success({
+				success({
 					msg: '登录成功！',
 					data: {
 						token,
 					},
 				});
 			} else {
-				this.fail({
+				fail({
 					code: 200,
 					msg: '验证码错误！',
 				});
 			}
 		} catch (e) {
-			this.fail({
+			fail({
 				msg: '登录失败！',
 				error: e,
 			});
@@ -79,22 +78,23 @@ export default class LoginController extends BaseController {
 	}
 
 	public async validLogin() {
+		const { ctx, success, fail } = this;
+
 		try {
-			const { ctx } = this;
 			const res = await ctx.valid();
 			if (res.success) {
-				this.success({
+				success({
 					msg: res.msg,
 				});
 			} else {
-				this.fail({
+				fail({
 					code: res.code,
 					msg: res.msg,
 					error: new Error(res.msg),
 				});
 			}
 		} catch (e) {
-			this.fail({
+			fail({
 				msg: e.message,
 				error: e,
 			});

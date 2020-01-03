@@ -44,6 +44,10 @@ const ArticleModel = (app: Application): Model<IArticleModel> => {
 				type: String,
 				enum: ['richText', 'markdown'],
 			},
+			visit: {
+				type: Number,
+				default: 0,
+			},
 			tags: [{ type: Schema.Types.ObjectId, ref: 'Tag' }],
 			userId: { type: Schema.Types.ObjectId, ref: 'Login' },
 		},

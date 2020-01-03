@@ -2,17 +2,18 @@ import BaseController from './BaseController';
 
 export default class MenuController extends BaseController {
 	public async getMenu() {
+		const { service, success, fail } = this;
+
 		try {
-			const { service } = this;
 			const menuResult = await service.menu.getMenuList();
-			this.success({
+			success({
 				msg: '获取菜单项成功',
 				data: {
 					list: menuResult,
 				},
 			});
 		} catch (e) {
-			this.fail({
+			fail({
 				msg: '获取菜单项失败！',
 				error: e,
 			});
@@ -20,24 +21,25 @@ export default class MenuController extends BaseController {
 	}
 
 	public async updateMenu() {
+		const { ctx, service, paramsError, success, fail } = this;
+
 		try {
-			const { service, ctx } = this;
 			const list = ctx.request.body.list;
 
 			if (!list || !Array.isArray(list)) {
-				this.paramsError();
+				paramsError();
 				return;
 			}
 
 			const menuResult = await service.menu.updateMenu();
-			this.success({
+			success({
 				msg: '更新菜单项成功',
 				data: {
 					list: menuResult,
 				},
 			});
 		} catch (e) {
-			this.fail({
+			fail({
 				msg: '更新菜单项失败！',
 				error: e,
 			});

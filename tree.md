@@ -11,6 +11,7 @@
 │   ├── controller/
 │   │   ├── BaseController.ts
 │   │   ├── article.ts
+│   │   ├── cat.ts
 │   │   ├── login.ts
 │   │   ├── menu.ts
 │   │   ├── news.ts
@@ -29,6 +30,7 @@
 │   │   └── robot.ts
 │   ├── model/
 │   │   ├── article.ts
+│   │   ├── catFigure.ts
 │   │   ├── image.ts
 │   │   ├── login.ts
 │   │   ├── menu.ts
@@ -46,6 +48,7 @@
 │   │   ├── e75c1100-2b75-11ea-a969-2dfbdeda1851.jpg
 │   │   └── fc8564f0-2b75-11ea-a969-2dfbdeda1851.jpeg
 │   ├── router.ts
+│   ├── schedule/
 │   └── service/
 │       ├── article.ts
 │       ├── login.ts
@@ -93,5 +96,5 @@
     │   └── plugin.d.ts
     └── index.d.ts
 
-21 directories, 71 files
+22 directories, 73 files
 ```

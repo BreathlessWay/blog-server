@@ -15,7 +15,10 @@ const ImageItemSchema = new Schema({
 		required: true,
 		trim: true,
 	},
-	show: Boolean,
+	show: {
+		type: Boolean,
+		default: true,
+	},
 });
 
 export default ImageItemSchema;
