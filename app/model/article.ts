@@ -45,6 +45,7 @@ const ArticleModel = (app: Application): Model<IArticleModel> => {
 				enum: ['richText', 'markdown'],
 			},
 			tags: [{ type: Schema.Types.ObjectId, ref: 'Tag' }],
+			userId: { type: Schema.Types.ObjectId, ref: 'Login' },
 		},
 		{
 			timestamps: true,

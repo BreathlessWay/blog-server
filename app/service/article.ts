@@ -51,11 +51,11 @@ export default class ArticleService extends Service {
 		};
 	}
 
-	public async createArticle() {
+	public async createArticle(userId) {
 		const { ctx } = this,
 			detail = ctx.request.body.detail;
 		const tags = detail.tags;
-		const data = new ctx.model.Article(detail);
+		const data = new ctx.model.Article({ ...detail, userId });
 		const res = await data.save();
 		await ctx.model.Tag.updateMany(
 			{ _id: { $in: tags } },
@@ -70,53 +70,80 @@ export default class ArticleService extends Service {
 		return ctx.model.Article.findById(id);
 	}
 
-	public async updateArticleDetail() {
+	public async updateArticleDetail(userId) {
+		console.log(userId);
 		const { ctx } = this,
 			id = ctx.params.id,
 			detail = ctx.request.body.detail;
 
-		await ctx.model.Article.findByIdAndUpdate(id, { $set: detail });
-		const tags = detail.tags;
-		if (Array.isArray(tags)) {
-			await ctx.model.Tag.updateMany({}, { $pull: { article: id } });
-			await ctx.model.Tag.updateMany(
-				{
-					_id: { $in: tags },
-				},
-				{
-					$push: { article: id },
-				},
-			);
+		const res = await ctx.model.Article.findOneAndUpdate(
+			{ _id: id, userId },
+			{ $set: detail },
+		);
+		if (res) {
+			const tags = detail.tags;
+			if (Array.isArray(tags)) {
+				await ctx.model.Tag.updateMany({}, { $pull: { article: id } });
+				await ctx.model.Tag.updateMany(
+					{
+						_id: { $in: tags },
+					},
+					{
+						$push: { article: id },
+					},
+				);
+			}
 		}
+		return res;
 	}
 
-	public async deleteArticle() {
+	public async deleteArticle(userId) {
 		const { ctx } = this;
 		const id = ctx.params.id;
-		await ctx.model.Article.findByIdAndRemove(id);
-		await ctx.model.Tag.updateMany({}, { $pull: { article: id } });
+		const res = await ctx.model.Article.findOneAndRemove({
+			_id: id,
+			userId,
+		});
+		if (res) {
+			await ctx.model.Tag.updateMany({}, { $pull: { article: id } });
+		}
+		return res;
 	}
 
-	public async batchUpdateArticle() {
+	public async batchUpdateArticle(userId) {
 		const { ctx } = this;
 		const { ids, status } = ctx.request.body;
 
-		return ctx.model.Article.updateMany(
-			{ _id: { $in: ids } },
-			{ $set: { status } },
-		);
+		const matchArticle = await ctx.model.Article.find({
+			_id: { $in: ids },
+			userId,
+		});
+		if (matchArticle && matchArticle.length === ids.length) {
+			return ctx.model.Article.updateMany(
+				{ _id: { $in: ids }, userId },
+				{ $set: { status } },
+			);
+		}
+		return null;
 	}
 
-	public async batchDeleteArticle() {
+	public async batchDeleteArticle(userId) {
 		const { ctx } = this;
 		const { ids } = ctx.request.body;
-		await ctx.model.Article.deleteMany({ _id: { $in: ids } });
-		const tagList = await ctx.model.Tag.find({}).then(res => {
-			return res.map(item => {
-				item.article = item.article.filter(v => !ids.includes(v.toString()));
-				return item.save();
-			});
+		const matchArticle = await ctx.model.Article.find({
+			_id: { $in: ids },
+			userId,
 		});
-		await Promise.all(tagList);
+		if (matchArticle && matchArticle.length === ids.length) {
+			await ctx.model.Article.deleteMany({ _id: { $in: ids } });
+			const tagList = await ctx.model.Tag.find({}).then(res => {
+				return res.map(item => {
+					item.article = item.article.filter(v => !ids.includes(v.toString()));
+					return item.save();
+				});
+			});
+			return await Promise.all(tagList);
+		}
+		return null;
 	}
 }

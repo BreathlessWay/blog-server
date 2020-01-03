@@ -47,13 +47,15 @@ export default class ArticleController extends BaseController {
 
 	public async createArticle() {
 		try {
-			const { ctx, service } = this;
+			const { ctx, service, userId } = this;
 			const data = ctx.request.body.detail;
-			await service.article.createArticle();
+
 			if (!data) {
 				this.paramsError();
 				return;
 			}
+
+			await service.article.createArticle(userId);
 
 			this.success({
 				msg: '新建文章成功！',
@@ -68,7 +70,7 @@ export default class ArticleController extends BaseController {
 
 	public async updateArticle() {
 		try {
-			const { ctx, service } = this;
+			const { ctx, service, userId } = this;
 			const id = ctx.params.id,
 				detail = ctx.request.body.detail;
 
@@ -77,10 +79,17 @@ export default class ArticleController extends BaseController {
 				return;
 			}
 
-			await service.article.updateArticleDetail();
-			this.success({
-				msg: '更新文章成功！',
-			});
+			const updateResult = await service.article.updateArticleDetail(userId);
+			if (updateResult) {
+				this.success({
+					msg: '更新文章成功！',
+				});
+			} else {
+				this.fail({
+					code: 403,
+					msg: '没有修改该文章的权限！',
+				});
+			}
 		} catch (e) {
 			this.fail({
 				msg: '更新文章失败！',
@@ -91,7 +100,7 @@ export default class ArticleController extends BaseController {
 
 	public async deleteArticle() {
 		try {
-			const { ctx, service } = this;
+			const { ctx, service, userId } = this;
 			const id = ctx.params.id;
 
 			if (!id) {
@@ -99,10 +108,17 @@ export default class ArticleController extends BaseController {
 				return;
 			}
 
-			await service.article.deleteArticle();
-			this.success({
-				msg: '删除文章成功！',
-			});
+			const deleteResult = await service.article.deleteArticle(userId);
+			if (deleteResult) {
+				this.success({
+					msg: '删除文章成功！',
+				});
+			} else {
+				this.fail({
+					code: 403,
+					msg: '没有删除该文章的权限！',
+				});
+			}
 		} catch (e) {
 			this.fail({
 				msg: '删除文章失败！',
@@ -113,7 +129,7 @@ export default class ArticleController extends BaseController {
 
 	public async batchUpdateArticle() {
 		try {
-			const { ctx, service } = this;
+			const { ctx, service, userId } = this;
 			const data = ctx.request.body.ids;
 
 			if (!data || !Array.isArray(data) || !data.length) {
@@ -121,10 +137,19 @@ export default class ArticleController extends BaseController {
 				return;
 			}
 
-			await service.article.batchUpdateArticle();
-			this.success({
-				msg: '批量更新文章成功！',
-			});
+			const batchUpdateResult = await service.article.batchUpdateArticle(
+				userId,
+			);
+			if (batchUpdateResult) {
+				this.success({
+					msg: '批量更新文章成功！',
+				});
+			} else {
+				this.fail({
+					code: 403,
+					msg: '部分文章没有修改权限！',
+				});
+			}
 		} catch (e) {
 			this.fail({
 				msg: '批量更新文章失败！',
@@ -135,17 +160,28 @@ export default class ArticleController extends BaseController {
 
 	public async batchDeleteArticle() {
 		try {
-			const { ctx, service } = this;
+			const { ctx, service, userId } = this;
 			const data = ctx.request.body.ids;
 
 			if (!data || !Array.isArray(data) || !data.length) {
 				this.paramsError();
 				return;
 			}
-			await service.article.batchDeleteArticle();
-			this.success({
-				msg: '删除文章成功！',
-			});
+
+			const batchDeleteResult = await service.article.batchDeleteArticle(
+				userId,
+			);
+
+			if (batchDeleteResult) {
+				this.success({
+					msg: '删除文章成功！',
+				});
+			} else {
+				this.fail({
+					code: 403,
+					msg: '部分文章没有删除权限！',
+				});
+			}
 		} catch (e) {
 			this.fail({
 				msg: '删除文章失败！',
