@@ -54,7 +54,7 @@ const UserModel = (app: Application): Model<IUserModel> => {
 	const UserSchema = new Schema(
 		{
 			personalFigure: {
-				type: [ImageItemSchema],
+				type: [ImageItemSchema(false)],
 			},
 			en: {
 				type: String,
@@ -105,7 +105,7 @@ const UserModel = (app: Application): Model<IUserModel> => {
 			},
 
 			hobbiesFigure: {
-				type: [ImageItemSchema],
+				type: [ImageItemSchema(false)],
 			},
 			personalTitle: {
 				type: String,

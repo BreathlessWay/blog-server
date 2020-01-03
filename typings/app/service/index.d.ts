@@ -3,6 +3,7 @@
 
 import 'egg';
 import ExportArticle from '../../../app/service/article';
+import ExportCat from '../../../app/service/cat';
 import ExportLogin from '../../../app/service/login';
 import ExportMenu from '../../../app/service/menu';
 import ExportNews from '../../../app/service/news';
@@ -14,6 +15,7 @@ import ExportUser from '../../../app/service/user';
 declare module 'egg' {
 	interface IService {
 		article: ExportArticle;
+		cat: ExportCat;
 		login: ExportLogin;
 		menu: ExportMenu;
 		news: ExportNews;

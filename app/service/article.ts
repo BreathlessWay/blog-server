@@ -117,11 +117,11 @@ export default class ArticleService extends Service {
 		const { ctx } = this;
 		const { ids, status } = ctx.request.body;
 
-		const matchArticle = await ctx.model.Article.find({
+		const matchArticleCount = await ctx.model.Article.countDocuments({
 			_id: { $in: ids },
 			userId,
 		});
-		if (matchArticle && matchArticle.length === ids.length) {
+		if (matchArticleCount === ids.length) {
 			return ctx.model.Article.updateMany(
 				{ _id: { $in: ids }, userId },
 				{ $set: { status } },
@@ -133,11 +133,11 @@ export default class ArticleService extends Service {
 	public async batchDeleteArticle(userId) {
 		const { ctx } = this;
 		const { ids } = ctx.request.body;
-		const matchArticle = await ctx.model.Article.find({
+		const matchArticleCount = await ctx.model.Article.countDocuments({
 			_id: { $in: ids },
 			userId,
 		});
-		if (matchArticle && matchArticle.length === ids.length) {
+		if (matchArticleCount === ids.length) {
 			await ctx.model.Article.deleteMany({ _id: { $in: ids } });
 			const tagList = await ctx.model.Tag.find({}).then(res => {
 				return res.map(item => {

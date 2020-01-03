@@ -72,3 +72,5 @@ export const CODE_LENGTH = 4;
 export const JWT_SECRET = '_1576490696679_2138';
 
 export const FILE_BASE_URL = '//localhost:7001/public/';
+
+export const MAX_FIGURE_COUNT = 5;

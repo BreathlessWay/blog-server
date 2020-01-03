@@ -48,15 +48,14 @@ export default class BaseController extends Controller {
 		msg?: string;
 		error?: Error;
 	}) {
-		const { ctx } = this;
-		ctx.handleError({
+		this.ctx.handleError({
 			code,
 			msg,
 			error,
 		});
 	}
 
-	public paramsError({ msg }: { msg: string } = { msg: '参数错误！' }) {
+	public clientError({ msg }: { msg: string } = { msg: '参数错误！' }) {
 		this.fail({
 			code: 400,
 			msg,

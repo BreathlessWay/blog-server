@@ -66,6 +66,8 @@ export default (appInfo: EggAppInfo) => {
 				url: 'mongodb://127.0.0.1/blog-server',
 				options: {
 					useFindAndModify: false,
+					useUnifiedTopology: true,
+					useCreateIndex: true,
 				},
 			},
 		},

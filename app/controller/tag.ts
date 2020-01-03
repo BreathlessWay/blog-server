@@ -2,18 +2,18 @@ import BaseController from './BaseController';
 
 export default class TagCController extends BaseController {
 	public async getTagList() {
-		const { success, service, fail } = this;
+		const { service } = this;
 
 		try {
 			const tagList = await service.tag.getTagList();
-			success({
+			this.success({
 				msg: '获取标签列表成功！',
 				data: {
 					list: tagList,
 				},
 			});
 		} catch (e) {
-			fail({
+			this.fail({
 				msg: '获取标签列表失败！',
 				error: e,
 			});
@@ -21,23 +21,23 @@ export default class TagCController extends BaseController {
 	}
 
 	public async editTagList() {
-		const { ctx, success, service, fail, paramsError } = this;
+		const { ctx, service } = this;
 
 		try {
 			const list = ctx.request.body.list;
 			if (!list || !Array.isArray(list)) {
-				paramsError();
+				this.clientError();
 				return;
 			}
 			const tagList = await service.tag.editTagList();
-			success({
+			this.success({
 				msg: '更新标签列表成功！',
 				data: {
 					list: tagList,
 				},
 			});
 		} catch (e) {
-			fail({
+			this.fail({
 				msg: '更新标签列表失败！',
 				error: e,
 			});

@@ -57,6 +57,26 @@ export default (app: Application) => {
 		controller.article.batchDeleteArticle,
 	);
 
+	router.get('/cat/figure', controller.cat.getCatFigure);
+
+	router.post(
+		'/cat/figure',
+		app.middleware.jwt(),
+		controller.cat.createCatFigure,
+	);
+
+	router.put(
+		'/cat/figure/:id',
+		app.middleware.jwt(),
+		controller.cat.updateCatFigure,
+	);
+
+	router.delete(
+		'/cat/figure/:id',
+		app.middleware.jwt(),
+		controller.cat.deleteCatFigure,
+	);
+
 	router.post('/upload', app.middleware.jwt(), controller.upload.uploadFile);
 
 	router.get('/soup', controller.soup.index);

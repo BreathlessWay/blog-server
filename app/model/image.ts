@@ -7,18 +7,25 @@ export interface IImageItemModel extends Document {
 	show: boolean;
 }
 
-const ImageItemSchema = new Schema({
-	title: String,
-	intro: String,
-	url: {
-		type: String,
-		required: true,
-		trim: true,
-	},
-	show: {
-		type: Boolean,
-		default: true,
-	},
-});
+const ImageItemSchema = timestamps => {
+	return new Schema(
+		{
+			title: String,
+			intro: String,
+			url: {
+				type: String,
+				required: true,
+				trim: true,
+			},
+			show: {
+				type: Boolean,
+				default: true,
+			},
+		},
+		{
+			timestamps,
+		},
+	);
+};
 
 export default ImageItemSchema;
