@@ -144,10 +144,9 @@ export default class CatController extends BaseController {
 				return;
 			}
 
-			const data = await service.cat.createCatList();
+			await service.cat.createCatList();
 			this.success({
 				msg: '新增图片成功！',
-				data,
 			});
 		} catch (e) {
 			this.fail({
