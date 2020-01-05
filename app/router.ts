@@ -105,6 +105,14 @@ export default (app: Application) => {
 		controller.cat.batchDeleteCatItem,
 	);
 
+	router.get('/album/list', controller.photography.getAlbumList);
+
+	router.post(
+		'/album',
+		app.middleware.jwt(),
+		controller.photography.createAlbum,
+	);
+
 	router.post('/upload', app.middleware.jwt(), controller.upload.uploadFile);
 
 	router.get('/soup', controller.soup.index);

@@ -7,6 +7,8 @@ import { ITagModel } from './tag';
 import { IArticleModel } from './article';
 import { ICatFigureItemModel } from './catFigure';
 import { ICatListItemModel } from './catList';
+import { IAlbumItemModel } from './albumList';
+import { IPhotoListItemModel } from './photoList';
 
 declare module 'egg' {
 	interface Context {
@@ -18,6 +20,8 @@ declare module 'egg' {
 			Article: Model<IArticleModel>;
 			CatFigure: Model<ICatFigureItemModel>;
 			CatList: Model<ICatListItemModel>;
+			AlbumList: Model<IAlbumItemModel>;
+			PhotoList: Model<IPhotoListItemModel>;
 		};
 	}
 }
