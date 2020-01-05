@@ -6,10 +6,9 @@ import { createHash } from 'crypto';
 import { CODE_EXPIRES_TIME, TOKEN_EXPIRES_TIME } from '../constants';
 
 export default class LoginService extends Service {
-	public async isRegister() {
+	public async isRegister(email) {
 		const { ctx } = this;
-		const user = await ctx.model.Login.find({ email: ctx.query.email });
-		return user && user.length > 0;
+		return ctx.model.Login.findOne({ email });
 	}
 
 	public async sendCode({ email }: { email: string }) {
@@ -35,9 +34,8 @@ export default class LoginService extends Service {
 		);
 	}
 
-	public async register() {
+	public async register(email) {
 		const { ctx } = this;
-		const email = ctx.request.body.email;
 		const user = new ctx.model.Login({
 			email,
 		});
@@ -45,9 +43,8 @@ export default class LoginService extends Service {
 		await this.sendCode({ email });
 	}
 
-	public async login() {
+	public async login({ email, code }) {
 		const { ctx } = this;
-		const { email, code } = ctx.request.body;
 		const md5 = createHash('md5');
 		const user = await ctx.model.Login.findOne({
 			email,

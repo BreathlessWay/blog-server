@@ -16,9 +16,8 @@ export default class MenuService extends Service {
 		return ctx.model.Menu.insertMany(baseRoute);
 	}
 
-	public async updateMenu() {
+	public async updateMenu(list) {
 		const { ctx } = this;
-		const list = ctx.request.body.list;
 
 		const allUpdate = list.map(item => {
 			return {

@@ -11,9 +11,8 @@ export default class UserService extends Service {
 		return userDetail;
 	}
 
-	public async updateUserDetail() {
+	public async updateUserDetail(data) {
 		const { ctx } = this;
-		const data = ctx.request.body;
 		return ctx.model.User.findOneAndUpdate(
 			{},
 			{

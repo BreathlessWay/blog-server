@@ -29,7 +29,7 @@ export default class TagCController extends BaseController {
 				this.clientError();
 				return;
 			}
-			const tagList = await service.tag.editTagList();
+			const tagList = await service.tag.editTagList(list);
 			this.success({
 				msg: '更新标签列表成功！',
 				data: {

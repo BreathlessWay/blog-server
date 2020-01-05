@@ -9,7 +9,7 @@ export default class LoginController extends BaseController {
 				this.clientError({ msg: '不是正确的邮箱账号！' });
 				return;
 			}
-			const isRegister = await service.login.isRegister();
+			const isRegister = await service.login.isRegister(email);
 			if (!isRegister) {
 				this.fail({ code: 200, msg: '该账号尚未注册！' });
 				return;
@@ -33,7 +33,7 @@ export default class LoginController extends BaseController {
 				this.clientError({ msg: '不是正确的邮箱账号！' });
 				return;
 			}
-			await service.login.register();
+			await service.login.register(email);
 			this.success({
 				msg: '注册成功！',
 			});
@@ -55,7 +55,7 @@ export default class LoginController extends BaseController {
 				return;
 			}
 
-			const token = await service.login.login();
+			const token = await service.login.login({ email, code });
 			if (token) {
 				this.success({
 					msg: '登录成功！',

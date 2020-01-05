@@ -9,9 +9,7 @@ import * as fs from 'fs';
 const pump = require('mz-modules/pump');
 
 export default class UploadService extends Service {
-	public async uploadFile() {
-		const { ctx } = this;
-		const stream = await ctx.getFileStream();
+	public async uploadFile(stream) {
 		const filename = uuid.v1() + path.extname(stream.filename);
 		const target = path.join(this.config.baseDir, 'app/public', filename);
 		const writeStream = fs.createWriteStream(target);

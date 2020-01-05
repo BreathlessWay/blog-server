@@ -1,7 +1,5 @@
 import { Service } from 'egg';
 
-import { BASE_PAGE_SIZE } from '../constants';
-
 export default class CatService extends Service {
 	// 猫卡通
 	public async catFigureCount() {
@@ -14,24 +12,20 @@ export default class CatService extends Service {
 		return ctx.model.CatFigure.find();
 	}
 
-	public async createCatFigure() {
-		const { ctx } = this,
-			data = ctx.request.body;
+	public async createCatFigure(data) {
+		const { ctx } = this;
 		const item = new ctx.model.CatFigure(data);
 		await item.save();
 	}
 
-	public async deleteCatFigure() {
-		const { ctx } = this,
-			id = ctx.params.id;
+	public async deleteCatFigure(id) {
+		const { ctx } = this;
 
 		return ctx.model.CatFigure.findOneAndRemove({ _id: id, show: false });
 	}
 
-	public async updateCatFigure() {
-		const { ctx } = this,
-			id = ctx.params.id,
-			data = ctx.request.body;
+	public async updateCatFigure({ id, data }) {
+		const { ctx } = this;
 		await ctx.model.CatFigure.updateMany({}, { show: false });
 		return ctx.model.CatFigure.findByIdAndUpdate(id, {
 			$set: data,
@@ -39,10 +33,8 @@ export default class CatService extends Service {
 	}
 
 	// 猫图片列表
-	public async getCatList() {
+	public async getCatList({ pageIndex, pageSize }) {
 		const { ctx } = this;
-		const pageIndex = Number(ctx.query.pageIndex) || 1,
-			pageSize = Number(ctx.query.pageSize) || BASE_PAGE_SIZE;
 
 		const count = await ctx.model.CatList.countDocuments(),
 			list = await ctx.model.CatList.find()
@@ -55,31 +47,25 @@ export default class CatService extends Service {
 		};
 	}
 
-	public async createCatList() {
-		const { ctx } = this,
-			{ list } = ctx.request.body;
-
+	public async createCatList(list) {
+		const { ctx } = this;
 		return ctx.model.CatList.insertMany(list);
 	}
 
-	public async updateCatInfo() {
-		const { ctx } = this,
-			id = ctx.params.id,
-			data = ctx.request.body;
+	public async updateCatInfo({ id, data }) {
+		const { ctx } = this;
 
 		return ctx.model.CatList.findByIdAndUpdate(id, { $set: data });
 	}
 
-	public async deleteCatItem() {
-		const { ctx } = this,
-			id = ctx.params.id;
+	public async deleteCatItem(id) {
+		const { ctx } = this;
 
 		return ctx.model.CatList.findByIdAndRemove(id);
 	}
 
-	public async batchUpdateCatInfo() {
-		const { ctx } = this,
-			{ ids, show } = ctx.request.body;
+	public async batchUpdateCatInfo({ ids, show }) {
+		const { ctx } = this;
 
 		return ctx.model.CatList.updateMany(
 			{ _id: { $in: ids } },
@@ -87,10 +73,9 @@ export default class CatService extends Service {
 		);
 	}
 
-	public async batchDeleteCatItem() {
-		const { ctx } = this,
-			{ ids } = ctx.query;
+	public async batchDeleteCatItem(ids) {
+		const { ctx } = this;
 
-		return ctx.model.CatList.deleteMany({ _id: { $in: JSON.parse(ids) } });
+		return ctx.model.CatList.deleteMany({ _id: { $in: ids } });
 	}
 }

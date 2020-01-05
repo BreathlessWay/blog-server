@@ -1,5 +1,5 @@
 import BaseController from './BaseController';
-import { MAX_FIGURE_COUNT } from '../constants';
+import { BASE_PAGE_SIZE, MAX_FIGURE_COUNT } from '../constants';
 
 export default class CatController extends BaseController {
 	// 猫卡通
@@ -27,9 +27,9 @@ export default class CatController extends BaseController {
 		const { ctx, service } = this;
 
 		try {
-			const { url } = ctx.request.body;
+			const data = ctx.request.body;
 
-			if (!url) {
+			if (!data.url) {
 				this.clientError();
 				return;
 			}
@@ -42,7 +42,7 @@ export default class CatController extends BaseController {
 				return;
 			}
 
-			await service.cat.createCatFigure();
+			await service.cat.createCatFigure(data);
 			const list = await service.cat.getCatFigure();
 
 			this.success({
@@ -68,14 +68,11 @@ export default class CatController extends BaseController {
 				this.clientError();
 				return;
 			}
-			const deleteResult = await service.cat.deleteCatFigure();
+			const deleteResult = await service.cat.deleteCatFigure(id);
 
 			if (deleteResult) {
 				this.success({
 					msg: '删除猫卡通图成功！',
-					data: {
-						list: [],
-					},
 				});
 			} else {
 				this.clientError({
@@ -95,13 +92,13 @@ export default class CatController extends BaseController {
 
 		try {
 			const id = ctx.params.id,
-				{ url } = ctx.request.body;
-			if (!id || !url) {
+				data = ctx.request.body;
+			if (!id || !data.url) {
 				this.clientError();
 				return;
 			}
 
-			await service.cat.updateCatFigure();
+			await service.cat.updateCatFigure({ id, data });
 
 			this.success({
 				msg: '更新猫卡通图成功！',
@@ -116,10 +113,13 @@ export default class CatController extends BaseController {
 
 	// 猫图列表
 	public async getCatList() {
-		const { service } = this;
+		const { service, ctx } = this;
 
 		try {
-			const data = await service.cat.getCatList();
+			const pageIndex = Number(ctx.query.pageIndex) || 1,
+				pageSize = Number(ctx.query.pageSize) || BASE_PAGE_SIZE;
+
+			const data = await service.cat.getCatList({ pageIndex, pageSize });
 
 			this.success({
 				msg: '获取图片列表成功！',
@@ -144,7 +144,7 @@ export default class CatController extends BaseController {
 				return;
 			}
 
-			await service.cat.createCatList();
+			await service.cat.createCatList(list);
 			this.success({
 				msg: '新增图片成功！',
 			});
@@ -168,7 +168,7 @@ export default class CatController extends BaseController {
 				return;
 			}
 
-			await service.cat.updateCatInfo();
+			await service.cat.updateCatInfo({ id, data });
 
 			this.success({
 				msg: '更新图片信息成功！',
@@ -192,7 +192,7 @@ export default class CatController extends BaseController {
 				return;
 			}
 
-			await service.cat.deleteCatItem();
+			await service.cat.deleteCatItem(id);
 
 			this.success({
 				msg: '删除图片成功！',
@@ -209,14 +209,14 @@ export default class CatController extends BaseController {
 		const { ctx, service } = this;
 
 		try {
-			const { ids } = ctx.request.body;
+			const { ids, show } = ctx.request.body;
 
 			if (!ids || !Array.isArray(ids) || !ids.length) {
 				this.clientError();
 				return;
 			}
 
-			await service.cat.batchUpdateCatInfo();
+			await service.cat.batchUpdateCatInfo({ ids, show });
 
 			this.success({
 				msg: '批量更新图片信息成功！',
@@ -233,13 +233,13 @@ export default class CatController extends BaseController {
 		const { ctx, service } = this;
 
 		try {
-			const { ids } = ctx.query;
-			if (!ids) {
+			const ids = JSON.parse(ctx.query.ids);
+			if (!ids || !Array.isArray(ids) || !ids.length) {
 				this.clientError();
 				return;
 			}
 
-			await service.cat.batchDeleteCatItem();
+			await service.cat.batchDeleteCatItem(ids);
 
 			this.success({
 				msg: '批量删除图片成功！',

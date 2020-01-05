@@ -1,10 +1,30 @@
 import BaseController from './BaseController';
+import { BASE_PAGE_SIZE } from '../constants';
+import * as Qs from 'qs';
 
 export default class ArticleController extends BaseController {
 	public async getArticleList() {
-		const { service } = this;
+		const { service, ctx } = this;
 		try {
-			const articleList = await service.article.getArticleList();
+			const {
+				keyword,
+				startTime,
+				endTime,
+				status,
+				tags,
+				pageIndex = 1,
+				pageSize = BASE_PAGE_SIZE,
+			} = Qs.parse(ctx.querystring);
+
+			const articleList = await service.article.getArticleList({
+				keyword,
+				startTime,
+				endTime,
+				status,
+				tags,
+				pageIndex,
+				pageSize,
+			});
 			this.success({
 				msg: '获取文章列表成功！',
 				data: articleList,
@@ -28,7 +48,7 @@ export default class ArticleController extends BaseController {
 				return;
 			}
 
-			const detail = await service.article.getArticleDetail();
+			const detail = await service.article.getArticleDetail(id);
 			this.success({
 				msg: '获取文章详情成功！',
 				data: detail,
@@ -45,14 +65,14 @@ export default class ArticleController extends BaseController {
 		const { ctx, service, userId } = this;
 
 		try {
-			const data = ctx.request.body.detail;
+			const detail = ctx.request.body.detail;
 
-			if (!data) {
+			if (!detail) {
 				this.clientError();
 				return;
 			}
 
-			await service.article.createArticle(userId);
+			await service.article.createArticle({ userId, detail });
 
 			this.success({
 				msg: '新建文章成功！',
@@ -77,17 +97,27 @@ export default class ArticleController extends BaseController {
 				return;
 			}
 
-			const updateResult = await service.article.updateArticleDetail(userId);
-			if (updateResult) {
-				this.success({
-					msg: '更新文章成功！',
-				});
-			} else {
+			const hasRight = await service.article.getCanEditArticleCount({
+				userId,
+				ids: [id],
+			});
+
+			if (!hasRight) {
 				this.clientError({
 					code: 403,
 					msg: '没有修改该文章的权限！',
 				});
+				return;
 			}
+
+			await service.article.updateArticleDetail({
+				userId,
+				id,
+				detail,
+			});
+			this.success({
+				msg: '更新文章成功！',
+			});
 		} catch (e) {
 			this.fail({
 				msg: '更新文章失败！',
@@ -107,17 +137,23 @@ export default class ArticleController extends BaseController {
 				return;
 			}
 
-			const deleteResult = await service.article.deleteArticle(userId);
-			if (deleteResult) {
-				this.success({
-					msg: '删除文章成功！',
-				});
-			} else {
+			const hasRight = await service.article.getCanEditArticleCount({
+				userId,
+				ids: [id],
+			});
+
+			if (!hasRight) {
 				this.clientError({
 					code: 403,
 					msg: '没有删除该文章的权限！',
 				});
+				return;
 			}
+
+			await service.article.deleteArticle({ userId, id });
+			this.success({
+				msg: '删除文章成功！',
+			});
 		} catch (e) {
 			this.fail({
 				msg: '删除文章失败！',
@@ -130,26 +166,34 @@ export default class ArticleController extends BaseController {
 		const { ctx, service, userId } = this;
 
 		try {
-			const data = ctx.request.body.ids;
+			const ids = ctx.request.body.ids;
 
-			if (!data || !Array.isArray(data) || !data.length) {
+			if (!ids || !Array.isArray(ids) || !ids.length) {
 				this.clientError();
 				return;
 			}
 
-			const batchUpdateResult = await service.article.batchUpdateArticle(
+			const hasRight = await service.article.getCanEditArticleCount({
 				userId,
-			);
-			if (batchUpdateResult) {
-				this.success({
-					msg: '批量更新文章成功！',
-				});
-			} else {
+				ids,
+			});
+
+			if (!hasRight) {
 				this.clientError({
 					code: 403,
 					msg: '部分文章没有修改权限！',
 				});
+				return;
 			}
+
+			await service.article.batchUpdateArticle({
+				userId,
+				ids,
+				status,
+			});
+			this.success({
+				msg: '批量更新文章成功！',
+			});
 		} catch (e) {
 			this.fail({
 				msg: '批量更新文章失败！',
@@ -162,27 +206,33 @@ export default class ArticleController extends BaseController {
 		const { ctx, service, userId } = this;
 
 		try {
-			const { ids } = ctx.queries;
+			const ids = JSON.parse(ctx.query.ids);
 
-			if (!ids) {
+			if (!ids || !Array.isArray(ids) || !ids.length) {
 				this.clientError();
 				return;
 			}
 
-			const batchDeleteResult = await service.article.batchDeleteArticle(
+			const hasRight = await service.article.getCanEditArticleCount({
 				userId,
-			);
+				ids,
+			});
 
-			if (batchDeleteResult) {
-				this.success({
-					msg: '删除文章成功！',
-				});
-			} else {
+			if (!hasRight) {
 				this.clientError({
 					code: 403,
 					msg: '部分文章没有删除权限！',
 				});
+				return;
 			}
+
+			await service.article.batchDeleteArticle({
+				userId,
+				ids,
+			});
+			this.success({
+				msg: '删除文章成功！',
+			});
 		} catch (e) {
 			this.fail({
 				msg: '删除文章失败！',

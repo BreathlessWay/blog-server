@@ -2,10 +2,17 @@ import BaseController from './BaseController';
 
 export default class UploadController extends BaseController {
 	public async uploadFile() {
-		const { service } = this;
+		const { service, ctx } = this;
 
 		try {
-			const data = await service.upload.uploadFile();
+			const stream = await ctx.getFileStream();
+
+			if (!stream) {
+				this.clientError();
+				return;
+			}
+
+			const data = await service.upload.uploadFile(stream);
 
 			this.success({
 				msg: '上传文件成功！',

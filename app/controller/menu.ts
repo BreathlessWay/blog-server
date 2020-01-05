@@ -31,7 +31,7 @@ export default class MenuController extends BaseController {
 				return;
 			}
 
-			const menuResult = await service.menu.updateMenu();
+			const menuResult = await service.menu.updateMenu(list);
 			this.success({
 				msg: '更新菜单项成功',
 				data: {

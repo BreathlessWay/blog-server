@@ -23,9 +23,8 @@ export default class TagService extends Service {
 		});
 	}
 
-	public async editTagList() {
+	public async editTagList(list) {
 		const { ctx } = this;
-		const list: Array<TagItemType> = ctx.request.body.list;
 
 		const updateList: Array<Partial<TagItemType>> = [],
 			addList: Array<Omit<TagItemType, '_id'>> = [];

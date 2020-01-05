@@ -29,7 +29,7 @@ export default class UserController extends BaseController {
 				return;
 			}
 
-			const userDetail = await service.user.updateUserDetail();
+			const userDetail = await service.user.updateUserDetail(data);
 			this.success({
 				msg: '更新用户信息成功！',
 				data: userDetail,
