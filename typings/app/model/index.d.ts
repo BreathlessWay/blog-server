@@ -2,27 +2,27 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
-import ExportAlbumList from '../../../app/model/album';
+import ExportAlbum from '../../../app/model/album';
 import ExportArticle from '../../../app/model/article';
 import ExportCatFigure from '../../../app/model/catFigure';
 import ExportCatList from '../../../app/model/catList';
 import ExportImage from '../../../app/model/image';
 import ExportLogin from '../../../app/model/login';
 import ExportMenu from '../../../app/model/menu';
-import ExportPhotoList from '../../../app/model/photoList';
+import ExportPhoto from '../../../app/model/photo';
 import ExportTag from '../../../app/model/tag';
 import ExportUser from '../../../app/model/user';
 
 declare module 'egg' {
 	interface IModel {
-		AlbumList: ReturnType<typeof ExportAlbumList>;
+		Album: ReturnType<typeof ExportAlbum>;
 		Article: ReturnType<typeof ExportArticle>;
 		CatFigure: ReturnType<typeof ExportCatFigure>;
 		CatList: ReturnType<typeof ExportCatList>;
 		Image: ReturnType<typeof ExportImage>;
 		Login: ReturnType<typeof ExportLogin>;
 		Menu: ReturnType<typeof ExportMenu>;
-		PhotoList: ReturnType<typeof ExportPhotoList>;
+		Photo: ReturnType<typeof ExportPhoto>;
 		Tag: ReturnType<typeof ExportTag>;
 		User: ReturnType<typeof ExportUser>;
 	}

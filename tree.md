@@ -38,7 +38,7 @@
 │   │   ├── login.ts
 │   │   ├── menu.ts
 │   │   ├── model.d.ts
-│   │   ├── photoList.ts
+│   │   ├── photo.ts
 │   │   ├── tag.ts
 │   │   └── user.ts
 │   ├── public/

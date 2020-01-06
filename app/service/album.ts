@@ -43,7 +43,7 @@ export default class AlbumService extends Service {
 		const { ctx } = this;
 
 		await ctx.model.Album.findByIdAndRemove(id);
-		await ctx.model.PhotoList.deleteMany({ albumId: id });
+		await ctx.model.Photo.deleteMany({ albumId: id });
 	}
 
 	public async batchUpdateAlbum({ ids, data }) {
@@ -56,6 +56,6 @@ export default class AlbumService extends Service {
 		const { ctx } = this;
 
 		await ctx.model.Album.deleteMany({ _id: { $in: ids } });
-		await ctx.model.PhotoList.deleteMany({ albumId: { $in: ids } });
+		await ctx.model.Photo.deleteMany({ albumId: { $in: ids } });
 	}
 }

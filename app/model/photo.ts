@@ -2,26 +2,26 @@ import { Model, Schema } from 'mongoose';
 import { Application } from 'egg';
 import { baseImageSchema, IImageItemModel } from './image';
 
-export interface IPhotoListItemModel extends IImageItemModel {
+export interface IPhotoModel extends IImageItemModel {
 	albumId: string;
 }
 
-const PhotoListModel = (app: Application): Model<IPhotoListItemModel> => {
+const PhotoModel = (app: Application): Model<IPhotoModel> => {
 	const { model } = app.mongoose;
 
 	const photoSchema = {
 		...baseImageSchema,
 		albumId: {
 			type: Schema.Types.ObjectId,
-			ref: 'AlbumList',
+			ref: 'Album',
 		},
 	};
 
-	const PhotoListSchema = new Schema(photoSchema, {
+	const PhotoSchema = new Schema(photoSchema, {
 		timestamps: true,
 	});
 
-	return model<IPhotoListItemModel>('PhotoList', PhotoListSchema);
+	return model<IPhotoModel>('Photo', PhotoSchema);
 };
 
-export default PhotoListModel;
+export default PhotoModel;
