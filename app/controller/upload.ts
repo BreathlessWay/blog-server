@@ -14,10 +14,16 @@ export default class UploadController extends BaseController {
 
 			const data = await service.upload.uploadFile(stream);
 
-			this.success({
-				msg: '上传文件成功！',
-				data,
-			});
+			if (data) {
+				this.success({
+					msg: '上传文件成功！',
+					data,
+				});
+			} else {
+				this.clientError({
+					msg: '上传文件失败！',
+				});
+			}
 		} catch (e) {
 			this.fail({
 				msg: '上传文件失败！',

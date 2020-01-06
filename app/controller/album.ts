@@ -2,7 +2,7 @@ import BaseController from './BaseController';
 
 import { BASE_PAGE_SIZE } from '../constants';
 
-export default class PhotographyController extends BaseController {
+export default class AlbumController extends BaseController {
 	public async getAlbumList() {
 		const { ctx, service } = this;
 
@@ -10,7 +10,7 @@ export default class PhotographyController extends BaseController {
 			const pageSize = Number(ctx.query.pageSize) || BASE_PAGE_SIZE,
 				pageIndex = Number(ctx.query.pageIndex) || 1;
 
-			const data = await service.photography.getAlbumList({
+			const data = await service.album.getAlbumList({
 				pageIndex,
 				pageSize,
 			});
@@ -21,6 +21,36 @@ export default class PhotographyController extends BaseController {
 		} catch (e) {
 			this.fail({
 				msg: '获取相册列表失败！',
+				error: e,
+			});
+		}
+	}
+
+	public async getAlbumInfo() {
+		const { ctx, service } = this;
+
+		try {
+			const id = ctx.params.id;
+
+			if (!id) {
+				this.clientError();
+				return;
+			}
+
+			const info = await service.album.getAlbumInfo(id);
+			if (info) {
+				this.success({
+					msg: '获取相册信息成功',
+					data: info,
+				});
+			} else {
+				this.clientError({
+					msg: '相册不存在！',
+				});
+			}
+		} catch (e) {
+			this.fail({
+				msg: '获取相册信息失败！',
 				error: e,
 			});
 		}
@@ -37,7 +67,7 @@ export default class PhotographyController extends BaseController {
 				return;
 			}
 
-			await service.photography.createAlbum({ title, show });
+			await service.album.createAlbum({ title, show });
 
 			this.success({
 				msg: '创建相册成功！',
@@ -62,7 +92,7 @@ export default class PhotographyController extends BaseController {
 				return;
 			}
 
-			await service.photography.updateAlbum({ id, data });
+			await service.album.updateAlbum({ id, data });
 
 			this.success({
 				msg: '更新相册成功！',
@@ -86,7 +116,7 @@ export default class PhotographyController extends BaseController {
 				return;
 			}
 
-			await service.photography.deleteAlbum({ id });
+			await service.album.deleteAlbum({ id });
 
 			this.success({
 				msg: '删除相册成功！',
@@ -110,7 +140,7 @@ export default class PhotographyController extends BaseController {
 				return;
 			}
 
-			await service.photography.batchUpdateAlbum({ ids, data });
+			await service.album.batchUpdateAlbum({ ids, data });
 
 			this.success({
 				msg: '批量修改相册成功！',
@@ -134,7 +164,7 @@ export default class PhotographyController extends BaseController {
 				return;
 			}
 
-			await service.photography.batchDeleteAlbum({ ids });
+			await service.album.batchDeleteAlbum({ ids });
 
 			this.success({
 				msg: '批量删除相册成功！',

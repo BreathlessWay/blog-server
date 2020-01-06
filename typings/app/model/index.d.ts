@@ -2,7 +2,7 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
-import ExportAlbumList from '../../../app/model/albumList';
+import ExportAlbumList from '../../../app/model/album';
 import ExportArticle from '../../../app/model/article';
 import ExportCatFigure from '../../../app/model/catFigure';
 import ExportCatList from '../../../app/model/catList';

@@ -7,7 +7,7 @@ import { ITagModel } from './tag';
 import { IArticleModel } from './article';
 import { ICatFigureItemModel } from './catFigure';
 import { ICatListItemModel } from './catList';
-import { IAlbumItemModel } from './albumList';
+import { IAlbumModel } from './album';
 import { IPhotoListItemModel } from './photoList';
 
 declare module 'egg' {
@@ -20,7 +20,7 @@ declare module 'egg' {
 			Article: Model<IArticleModel>;
 			CatFigure: Model<ICatFigureItemModel>;
 			CatList: Model<ICatListItemModel>;
-			AlbumList: Model<IAlbumItemModel>;
+			Album: Model<IAlbumModel>;
 			PhotoList: Model<IPhotoListItemModel>;
 		};
 	}

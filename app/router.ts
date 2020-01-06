@@ -105,36 +105,30 @@ export default (app: Application) => {
 		controller.cat.batchDeleteCatItem,
 	);
 
-	router.get('/album/list', controller.photography.getAlbumList);
+	router.get('/album/list', controller.album.getAlbumList);
 
-	router.post(
-		'/album',
-		app.middleware.jwt(),
-		controller.photography.createAlbum,
-	);
+	router.get('/album/:id', controller.album.getAlbumInfo);
 
-	router.put(
-		'/album/:id',
-		app.middleware.jwt(),
-		controller.photography.updateAlbum,
-	);
+	router.post('/album', app.middleware.jwt(), controller.album.createAlbum);
+
+	router.put('/album/:id', app.middleware.jwt(), controller.album.updateAlbum);
 
 	router.delete(
 		'/album/:id',
 		app.middleware.jwt(),
-		controller.photography.deleteAlbum,
+		controller.album.deleteAlbum,
 	);
 
 	router.put(
 		'/batch/update/album',
 		app.middleware.jwt(),
-		controller.photography.batchUpdateAlbum,
+		controller.album.batchUpdateAlbum,
 	);
 
 	router.delete(
 		'/batch/delete/album',
 		app.middleware.jwt(),
-		controller.photography.batchDeleteAlbum,
+		controller.album.batchDeleteAlbum,
 	);
 
 	router.post('/upload', app.middleware.jwt(), controller.upload.uploadFile);

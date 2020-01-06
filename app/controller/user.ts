@@ -6,10 +6,14 @@ export default class UserController extends BaseController {
 
 		try {
 			const userDetail = await service.user.getUserDetail();
-			this.success({
-				msg: '获取用户信息成功！',
-				data: userDetail,
-			});
+			if (userDetail) {
+				this.success({
+					msg: '获取用户信息成功！',
+					data: userDetail,
+				});
+			} else {
+				this.clientError({ msg: '用户信息不存在！' });
+			}
 		} catch (e) {
 			this.fail({
 				msg: '获取用户信息失败！',

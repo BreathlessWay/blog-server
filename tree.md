@@ -10,12 +10,12 @@
 │   │   └── user.ts
 │   ├── controller/
 │   │   ├── BaseController.ts
+│   │   ├── album.ts
 │   │   ├── article.ts
 │   │   ├── cat.ts
 │   │   ├── login.ts
 │   │   ├── menu.ts
 │   │   ├── news.ts
-│   │   ├── photography.ts
 │   │   ├── soup.ts
 │   │   ├── tag.ts
 │   │   ├── upload.ts
@@ -30,7 +30,7 @@
 │   │   ├── notfound_handler.ts
 │   │   └── robot.ts
 │   ├── model/
-│   │   ├── albumList.ts
+│   │   ├── album.ts
 │   │   ├── article.ts
 │   │   ├── catFigure.ts
 │   │   ├── catList.ts
@@ -45,12 +45,12 @@
 │   ├── router.ts
 │   ├── schedule/
 │   └── service/
+│       ├── album.ts
 │       ├── article.ts
 │       ├── cat.ts
 │       ├── login.ts
 │       ├── menu.ts
 │       ├── news.ts
-│       ├── photography.ts
 │       ├── soup.ts
 │       ├── tag.ts
 │       ├── upload.ts

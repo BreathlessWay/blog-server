@@ -49,10 +49,16 @@ export default class ArticleController extends BaseController {
 			}
 
 			const detail = await service.article.getArticleDetail(id);
-			this.success({
-				msg: '获取文章详情成功！',
-				data: detail,
-			});
+			if (detail) {
+				this.success({
+					msg: '获取文章详情成功！',
+					data: detail,
+				});
+			} else {
+				this.clientError({
+					msg: '文章不存在！',
+				});
+			}
 		} catch (e) {
 			this.fail({
 				msg: '获取文章详情失败！',

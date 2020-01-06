@@ -1,7 +1,7 @@
 import { Model, Document, Schema } from 'mongoose';
 import { Application } from 'egg';
 
-export interface IAlbumItemModel extends Document {
+export interface IAlbumModel extends Document {
 	title: string;
 	show: boolean;
 	count: number;
@@ -9,10 +9,10 @@ export interface IAlbumItemModel extends Document {
 	photo: Array<string>;
 }
 
-const AlbumListModel = (app: Application): Model<IAlbumItemModel> => {
+const AlbumModel = (app: Application): Model<IAlbumModel> => {
 	const { model } = app.mongoose;
 
-	const AlbumItemSchema = new Schema(
+	const AlbumSchema = new Schema(
 		{
 			title: {
 				type: String,
@@ -32,11 +32,11 @@ const AlbumListModel = (app: Application): Model<IAlbumItemModel> => {
 		},
 	);
 
-	AlbumItemSchema.virtual('count').get(function(this: IAlbumItemModel) {
+	AlbumSchema.virtual('count').get(function(this: IAlbumModel) {
 		return this.photo.length;
 	});
 
-	return model<IAlbumItemModel>('AlbumList', AlbumItemSchema);
+	return model<IAlbumModel>('Album', AlbumSchema);
 };
 
-export default AlbumListModel;
+export default AlbumModel;
