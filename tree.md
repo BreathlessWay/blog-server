@@ -15,6 +15,7 @@
 │   │   ├── login.ts
 │   │   ├── menu.ts
 │   │   ├── news.ts
+│   │   ├── photography.ts
 │   │   ├── soup.ts
 │   │   ├── tag.ts
 │   │   ├── upload.ts
@@ -29,6 +30,7 @@
 │   │   ├── notfound_handler.ts
 │   │   └── robot.ts
 │   ├── model/
+│   │   ├── albumList.ts
 │   │   ├── article.ts
 │   │   ├── catFigure.ts
 │   │   ├── catList.ts
@@ -36,6 +38,7 @@
 │   │   ├── login.ts
 │   │   ├── menu.ts
 │   │   ├── model.d.ts
+│   │   ├── photoList.ts
 │   │   ├── tag.ts
 │   │   └── user.ts
 │   ├── public/
@@ -47,6 +50,7 @@
 │       ├── login.ts
 │       ├── menu.ts
 │       ├── news.ts
+│       ├── photography.ts
 │       ├── soup.ts
 │       ├── tag.ts
 │       ├── upload.ts
@@ -89,5 +93,5 @@
     │   └── plugin.d.ts
     └── index.d.ts
 
-22 directories, 66 files
+22 directories, 70 files
 ```

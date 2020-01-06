@@ -113,6 +113,30 @@ export default (app: Application) => {
 		controller.photography.createAlbum,
 	);
 
+	router.put(
+		'/album/:id',
+		app.middleware.jwt(),
+		controller.photography.updateAlbum,
+	);
+
+	router.delete(
+		'/album/:id',
+		app.middleware.jwt(),
+		controller.photography.deleteAlbum,
+	);
+
+	router.put(
+		'/batch/update/album',
+		app.middleware.jwt(),
+		controller.photography.batchUpdateAlbum,
+	);
+
+	router.delete(
+		'/batch/delete/album',
+		app.middleware.jwt(),
+		controller.photography.batchDeleteAlbum,
+	);
+
 	router.post('/upload', app.middleware.jwt(), controller.upload.uploadFile);
 
 	router.get('/soup', controller.soup.index);

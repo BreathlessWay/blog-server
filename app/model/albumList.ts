@@ -18,16 +18,14 @@ const AlbumListModel = (app: Application): Model<IAlbumItemModel> => {
 				type: String,
 				default: '',
 				unique: true,
+				required: true,
 			},
 			show: {
 				type: Boolean,
 				default: true,
 			},
 			photo: [{ type: Schema.Types.ObjectId, ref: 'PhotoList' }],
-			cover: {
-				type: String,
-				default: '',
-			},
+			cover: { type: Schema.Types.ObjectId, ref: 'PhotoList' },
 		},
 		{
 			timestamps: true,

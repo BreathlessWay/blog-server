@@ -24,4 +24,33 @@ export default class PhotographyService extends Service {
 		});
 		return album.save();
 	}
+
+	public async updateAlbum({ id, data }) {
+		const { ctx } = this;
+
+		return ctx.model.AlbumList.findByIdAndUpdate(id, { $set: data });
+	}
+
+	public async deleteAlbum({ id }) {
+		const { ctx } = this;
+
+		await ctx.model.AlbumList.findByIdAndRemove(id);
+		await ctx.model.PhotoList.deleteMany({ albumId: id });
+	}
+
+	public async batchUpdateAlbum({ ids, data }) {
+		const { ctx } = this;
+
+		return ctx.model.AlbumList.updateMany(
+			{ _id: { $in: ids } },
+			{ $set: data },
+		);
+	}
+
+	public async batchDeleteAlbum({ ids }) {
+		const { ctx } = this;
+
+		await ctx.model.AlbumList.deleteMany({ _id: { $in: ids } });
+		await ctx.model.PhotoList.deleteMany({ albumId: { $in: ids } });
+	}
 }
