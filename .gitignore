@@ -12,6 +12,7 @@ logs/
 *.js
 !.autod.conf.js
 !commitlint.config.js
+app/public/upload/
 
 app/**/*.js
 test/**/*.js
