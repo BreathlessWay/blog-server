@@ -86,4 +86,85 @@ export default class PhotoController extends BaseController {
 			});
 		}
 	}
+
+	public async deletePhoto() {
+		const { ctx, service } = this;
+
+		try {
+			const { albumId, id } = ctx.params;
+
+			if (!albumId || !id) {
+				this.clientError();
+				return;
+			}
+
+			await service.photo.deletePhoto({ albumId, id });
+
+			this.success({
+				msg: '删除照片成功！',
+			});
+		} catch (e) {
+			this.fail({
+				msg: '删除照片失败！',
+				error: e,
+			});
+		}
+	}
+
+	public async batchUpdatePhotoInfo() {
+		const { ctx, service } = this;
+
+		try {
+			const { ids, show } = ctx.request.body,
+				albumId = ctx.params.albumId;
+
+			if (!ids || !Array.isArray(ids) || !ids.length || !albumId) {
+				this.clientError();
+				return;
+			}
+
+			await service.photo.batchUpdatePhotoInfo({ ids, show, albumId });
+
+			this.success({
+				msg: '批量修改照片成功！',
+			});
+		} catch (e) {
+			this.fail({
+				msg: '批量修改照片失败！',
+				error: e,
+			});
+		}
+	}
+
+	public async batchDeletePhoto() {
+		const { ctx, service } = this;
+
+		try {
+			let { ids } = ctx.query,
+				albumId = ctx.params.albumId;
+
+			if (!ids || !albumId) {
+				this.clientError();
+				return;
+			}
+
+			ids = JSON.parse(ids);
+
+			if (!Array.isArray(ids) || !ids.length) {
+				this.clientError();
+				return;
+			}
+
+			await service.photo.batchDeletePhoto({ albumId, ids });
+
+			this.success({
+				msg: '批量删除照片成功！',
+			});
+		} catch (e) {
+			this.fail({
+				msg: '批量删除照片失败！',
+				error: e,
+			});
+		}
+	}
 }

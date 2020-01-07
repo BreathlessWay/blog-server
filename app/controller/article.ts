@@ -220,9 +220,13 @@ export default class ArticleController extends BaseController {
 		const { ctx, service, userId } = this;
 
 		try {
-			const ids = JSON.parse(ctx.query.ids);
-
-			if (!ids || !Array.isArray(ids) || !ids.length) {
+			let ids = ctx.query.ids;
+			if (!ids) {
+				this.clientError();
+				return;
+			}
+			ids = JSON.parse(ids);
+			if (!Array.isArray(ids) || !ids.length) {
 				this.clientError();
 				return;
 			}

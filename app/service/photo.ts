@@ -34,4 +34,25 @@ export default class PhotoService extends Service {
 			{ $set: detail },
 		);
 	}
+
+	public async deletePhoto({ albumId, id }) {
+		const { ctx } = this;
+
+		return ctx.model.Photo.findOneAndRemove({ _id: id, albumId });
+	}
+
+	public async batchUpdatePhotoInfo({ ids, show, albumId }) {
+		const { ctx } = this;
+
+		return ctx.model.Photo.updateMany(
+			{ _id: { $in: ids }, albumId },
+			{ $set: { show } },
+		);
+	}
+
+	public async batchDeletePhoto({ albumId, ids }) {
+		const { ctx } = this;
+
+		return ctx.model.Photo.deleteMany({ _id: { $in: ids }, albumId });
+	}
 }

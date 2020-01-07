@@ -16,6 +16,7 @@
 │   │   ├── login.ts
 │   │   ├── menu.ts
 │   │   ├── news.ts
+│   │   ├── photo.ts
 │   │   ├── soup.ts
 │   │   ├── tag.ts
 │   │   ├── upload.ts
@@ -42,6 +43,10 @@
 │   │   ├── tag.ts
 │   │   └── user.ts
 │   ├── public/
+│   │   ├── 921e6e10-30f5-11ea-867d-81ab9d1b05c9.jpg
+│   │   ├── 921f5870-30f5-11ea-867d-81ab9d1b05c9.jpeg
+│   │   ├── 921f7f80-30f5-11ea-867d-81ab9d1b05c9.jpeg
+│   │   └── 922069e0-30f5-11ea-867d-81ab9d1b05c9.jpg
 │   ├── router.ts
 │   ├── schedule/
 │   └── service/
@@ -51,6 +56,7 @@
 │       ├── login.ts
 │       ├── menu.ts
 │       ├── news.ts
+│       ├── photo.ts
 │       ├── soup.ts
 │       ├── tag.ts
 │       ├── upload.ts
@@ -93,5 +99,5 @@
     │   └── plugin.d.ts
     └── index.d.ts
 
-22 directories, 70 files
+22 directories, 76 files
 ```

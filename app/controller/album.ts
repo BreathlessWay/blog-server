@@ -164,9 +164,13 @@ export default class AlbumController extends BaseController {
 		const { ctx, service } = this;
 
 		try {
-			const ids = JSON.parse(ctx.query.ids);
-			console.log(ids);
-			if (!ids || !Array.isArray(ids) || !ids.length) {
+			let ids = ctx.query.ids;
+			if (!ids) {
+				this.clientError();
+				return;
+			}
+			ids = JSON.parse(ids);
+			if (!Array.isArray(ids) || !ids.length) {
 				this.clientError();
 				return;
 			}

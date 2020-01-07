@@ -1,13 +1,22 @@
 import { Service } from 'egg';
+import { IAlbumModel } from '../model/album';
 
 export default class AlbumService extends Service {
 	public async getAlbumList({ pageIndex, pageSize }) {
 		const { ctx } = this;
-		const count = await ctx.model.Album.countDocuments(),
-			list = await ctx.model.Album.find()
+		const count = await ctx.model.Album.countDocuments();
+		const query = ctx.model.Album.find();
+
+		let list: Array<IAlbumModel> = [];
+
+		if (pageSize && pageIndex) {
+			list = await query
 				.select('-photo')
 				.skip((pageIndex - 1) * pageSize)
 				.limit(pageSize);
+		} else {
+			list = await query.select('title');
+		}
 
 		return {
 			count,

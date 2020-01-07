@@ -145,6 +145,24 @@ export default (app: Application) => {
 		controller.photo.updatePhotoInfo,
 	);
 
+	router.delete(
+		'/photo/:albumId/:id',
+		app.middleware.jwt(),
+		controller.photo.deletePhoto,
+	);
+
+	router.put(
+		'/batch/update/photo/:albumId',
+		app.middleware.jwt(),
+		controller.photo.batchUpdatePhotoInfo,
+	);
+
+	router.delete(
+		'/batch/delete/photo/:albumId',
+		app.middleware.jwt(),
+		controller.photo.batchDeletePhoto,
+	);
+
 	router.post('/upload', app.middleware.jwt(), controller.upload.uploadFile);
 
 	router.get('/soup', controller.soup.index);
