@@ -116,8 +116,15 @@ export default class CatController extends BaseController {
 		const { service, ctx } = this;
 
 		try {
-			const pageIndex = Number(ctx.query.pageIndex) || 1,
-				pageSize = Number(ctx.query.pageSize) || BASE_PAGE_SIZE;
+			let { pageIndex, pageSize } = ctx.query;
+
+			pageIndex = Number(pageIndex) || 1;
+			pageSize = Number(pageSize) || BASE_PAGE_SIZE;
+
+			if (isNaN(pageIndex) || isNaN(pageSize)) {
+				this.clientError();
+				return;
+			}
 
 			const data = await service.cat.getCatList({ pageIndex, pageSize });
 

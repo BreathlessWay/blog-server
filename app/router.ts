@@ -131,7 +131,19 @@ export default (app: Application) => {
 		controller.album.batchDeleteAlbum,
 	);
 
-	router.get('/photo/list', controller.photo.getPhotoList);
+	router.get('/photo/list/:albumId', controller.photo.getPhotoList);
+
+	router.post(
+		'/photo/:albumId',
+		app.middleware.jwt(),
+		controller.photo.createPhoto,
+	);
+
+	router.put(
+		'/photo/:albumId/:id',
+		app.middleware.jwt(),
+		controller.photo.updatePhotoInfo,
+	);
 
 	router.post('/upload', app.middleware.jwt(), controller.upload.uploadFile);
 

@@ -49,7 +49,7 @@ export default class ArticleService extends Service {
 		const count = await ctx.model.Article.find(params).countDocuments(),
 			list = await ctx.model.Article.find(params)
 				.skip((pageIndex - 1) * pageSize)
-				.limit(Number(pageSize))
+				.limit(pageSize)
 				.populate('tags', 'name');
 
 		return {

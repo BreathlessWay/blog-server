@@ -1,14 +1,21 @@
 import BaseController from './BaseController';
 
-import { BASE_PAGE_SIZE } from '../constants';
-
 export default class AlbumController extends BaseController {
 	public async getAlbumList() {
 		const { ctx, service } = this;
 
 		try {
-			const pageSize = Number(ctx.query.pageSize) || BASE_PAGE_SIZE,
-				pageIndex = Number(ctx.query.pageIndex) || 1;
+			let { pageSize, pageIndex } = ctx.query;
+
+			if (pageSize && pageIndex) {
+				pageSize = Number(pageSize);
+				pageIndex = Number(pageIndex);
+
+				if (isNaN(pageSize) || isNaN(pageIndex)) {
+					this.clientError();
+					return;
+				}
+			}
 
 			const data = await service.album.getAlbumList({
 				pageIndex,

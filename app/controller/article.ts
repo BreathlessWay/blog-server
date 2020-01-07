@@ -6,15 +6,23 @@ export default class ArticleController extends BaseController {
 	public async getArticleList() {
 		const { service, ctx } = this;
 		try {
-			const {
+			let {
 				keyword,
 				startTime,
 				endTime,
 				status,
 				tags,
-				pageIndex = 1,
-				pageSize = BASE_PAGE_SIZE,
+				pageIndex,
+				pageSize,
 			} = Qs.parse(ctx.querystring);
+
+			pageIndex = Number(pageIndex) || 1;
+			pageSize = Number(pageSize) || BASE_PAGE_SIZE;
+
+			if (isNaN(pageIndex) || isNaN(pageSize)) {
+				this.clientError();
+				return;
+			}
 
 			const articleList = await service.article.getArticleList({
 				keyword,
