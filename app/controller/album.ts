@@ -187,4 +187,34 @@ export default class AlbumController extends BaseController {
 			});
 		}
 	}
+
+	public async setAlbumCover() {
+		const { ctx, service } = this;
+
+		try {
+			const { albumId, id } = ctx.params;
+
+			if (!albumId || !id) {
+				this.clientError();
+				return;
+			}
+
+			const cover = await service.album.setAlbumCover({ albumId, id });
+
+			if (cover) {
+				this.success({
+					msg: '设置封面成功！',
+				});
+			} else {
+				this.clientError({
+					msg: '照片不存在！',
+				});
+			}
+		} catch (e) {
+			this.fail({
+				msg: '设置封面失败！',
+				error: e,
+			});
+		}
+	}
 }

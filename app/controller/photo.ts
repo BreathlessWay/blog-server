@@ -48,10 +48,13 @@ export default class PhotoController extends BaseController {
 				return;
 			}
 
-			await service.photo.createPhoto({ list, albumId });
-
+			const res = await service.photo.createPhoto({ list, albumId });
 			this.success({
 				msg: '添加照片成功！',
+				data: {
+					count: list.length,
+					list: res,
+				},
 			});
 		} catch (e) {
 			this.fail({

@@ -11,7 +11,7 @@ export default class AlbumService extends Service {
 
 		if (pageSize && pageIndex) {
 			list = await query
-				.select('-photo')
+				.populate({ path: 'cover', select: 'url' })
 				.skip((pageIndex - 1) * pageSize)
 				.limit(pageSize);
 		} else {
@@ -66,5 +66,18 @@ export default class AlbumService extends Service {
 
 		await ctx.model.Album.deleteMany({ _id: { $in: ids } });
 		await ctx.model.Photo.deleteMany({ albumId: { $in: ids } });
+	}
+
+	public async setAlbumCover({ albumId, id }) {
+		const { ctx } = this;
+
+		const photo = await ctx.model.Photo.findOne({ _id: id, albumId });
+		if (photo) {
+			return ctx.model.Album.findByIdAndUpdate(
+				{ _id: albumId },
+				{ $set: { cover: id } },
+			);
+		}
+		return photo;
 	}
 }

@@ -29,6 +29,13 @@ export default class PhotoService extends Service {
 	public async updatePhotoInfo({ detail, albumId, id }) {
 		const { ctx } = this;
 
+		if (detail.albumId && albumId !== detail.albumId) {
+			await ctx.model.Album.findOneAndUpdate(
+				{ _id: albumId, cover: id },
+				{ $unset: { cover: '' } },
+			);
+		}
+
 		return ctx.model.Photo.findByIdAndUpdate(
 			{ albumId, _id: id },
 			{ $set: detail },

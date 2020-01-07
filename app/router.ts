@@ -113,6 +113,12 @@ export default (app: Application) => {
 
 	router.put('/album/:id', app.middleware.jwt(), controller.album.updateAlbum);
 
+	router.put(
+		'/album/cover/:albumId/:id',
+		app.middleware.jwt(),
+		controller.album.setAlbumCover,
+	);
+
 	router.delete(
 		'/album/:id',
 		app.middleware.jwt(),

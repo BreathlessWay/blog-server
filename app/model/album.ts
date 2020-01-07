@@ -24,8 +24,8 @@ const AlbumModel = (app: Application): Model<IAlbumModel> => {
 				type: Boolean,
 				default: true,
 			},
-			photo: [{ type: Schema.Types.ObjectId, ref: 'PhotoList' }],
-			cover: { type: Schema.Types.ObjectId, ref: 'PhotoList' },
+			photo: [{ type: Schema.Types.ObjectId, ref: 'Photo' }],
+			cover: { type: Schema.Types.ObjectId, ref: 'Photo' },
 		},
 		{
 			timestamps: true,
