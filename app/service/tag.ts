@@ -26,6 +26,10 @@ export default class TagService extends Service {
 	public async editTagList(list) {
 		const { ctx } = this;
 
+		if (!list.length) {
+			return ctx.model.Tag.deleteMany({});
+		}
+
 		const updateList: Array<Partial<TagItemType>> = [],
 			addList: Array<Omit<TagItemType, '_id'>> = [];
 		let deleteList: Array<Partial<TagItemType>> = [];
