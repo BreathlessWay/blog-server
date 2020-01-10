@@ -15,6 +15,17 @@
 4. [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken), 登录验证
 5. egg-mongoose 的类型生成有问题, 需要自己手动 declare
 6. 把入参放到 service 是不符合 controller/service/model 这样的设计, 应该在 controller 获取 query/params/body, 作为参数传入 service
+7. egg 启动的服务要在外网访问需要配置
+   ```
+   //  egg-scripts启动的域名和端口
+   config.cluster = {
+       listen: {
+           port: 7001,
+           hostname: '127.0.0.1', // 不建议设置 hostname 为 '0.0.0.0'，它将允许来自外部网络和来源的连接，请在知晓风险的情况下使用
+           // path: '/var/run/egg.sock',
+       },
+   };
+   ```
 
 > Mongodb/Mongoose
 

@@ -45,7 +45,7 @@ export default (appInfo: EggAppInfo) => {
 	config.cluster = {
 		listen: {
 			port: 7001,
-			hostname: '127.0.0.1', // 不建议设置 hostname 为 '0.0.0.0'，它将允许来自外部网络和来源的连接，请在知晓风险的情况下使用
+			hostname: '0.0.0.0', // 不建议设置 hostname 为 '0.0.0.0'，它将允许来自外部网络和来源的连接，请在知晓风险的情况下使用
 			// path: '/var/run/egg.sock',
 		},
 	};
@@ -56,13 +56,6 @@ export default (appInfo: EggAppInfo) => {
 			// 注意，定义了 config.all 之后，其他错误处理方法不会再生效
 			ctx.body = err;
 			ctx.status = 500;
-		},
-	};
-
-	config.cluster = {
-		listen: {
-			port: 7001,
-			hostname: '0.0.0.0', // 不建议设置 hostname 为 '0.0.0.0'，它将允许来自外部网络和来源的连接，请在知晓风险的情况下使用
 		},
 	};
 
