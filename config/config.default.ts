@@ -41,6 +41,13 @@ export default (appInfo: EggAppInfo) => {
 		fileExtensions: ['.doc', '.docx', '.wps', '.page'],
 	};
 
+	// config.static = {
+	// 	prefix: '/public/',
+	// 	dir: path.join(appInfo.baseDir, 'app/public'),
+	// 	maxAge: 31536000, //31536000 in prod env, 0 in other envs
+	// 	buffer: true, //true  in prod env, false in other envs
+	// };
+
 	//  egg-scripts启动的域名和端口
 	config.cluster = {
 		listen: {
