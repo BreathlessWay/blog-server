@@ -172,6 +172,4 @@ export default (app: Application) => {
 	router.post('/upload', app.middleware.jwt(), controller.upload.uploadFile);
 
 	router.get('/soup', controller.soup.index);
-
-	router.get('news', '/news/:id', controller.news.list);
 };

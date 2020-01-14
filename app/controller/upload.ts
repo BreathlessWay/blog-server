@@ -2,7 +2,7 @@ import BaseController from './BaseController';
 
 export default class UploadController extends BaseController {
 	public async uploadFile() {
-		const { service, ctx } = this;
+		const { service, ctx, config } = this;
 
 		try {
 			const stream = await ctx.getFileStream();
@@ -12,7 +12,10 @@ export default class UploadController extends BaseController {
 				return;
 			}
 
-			const data = await service.upload.uploadFile(stream);
+			const data = await service.upload.uploadFile({
+				stream,
+				prefix: config.upload.urL,
+			});
 
 			if (data) {
 				this.success({

@@ -1,5 +1,5 @@
 import { Context, EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
-import { JWT_SECRET } from '../app/constants';
+import { FILE_BASE_URL_DEV, JWT_SECRET } from '../app/constants';
 
 export default (appInfo: EggAppInfo) => {
 	const config = {} as PowerPartial<EggAppConfig>;
@@ -70,18 +70,19 @@ export default (appInfo: EggAppInfo) => {
 	const bizConfig = {
 		mongoose: {
 			client: {
-				url: 'mongodb://127.0.0.1:4444/blog-server',
+				url: 'mongodb://127.0.0.1/blog-server',
 				options: {
 					useFindAndModify: false,
 					useUnifiedTopology: true,
 					useCreateIndex: true,
-					user: 'blog',
-					pass: 'blog',
 				},
 			},
 		},
 		jwt: {
 			secret: JWT_SECRET,
+		},
+		upload: {
+			urL: FILE_BASE_URL_DEV,
 		},
 	};
 	// the return config will combines to EggAppConfig

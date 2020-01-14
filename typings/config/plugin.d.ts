@@ -14,7 +14,6 @@ import 'egg-schedule';
 import 'egg-static';
 import 'egg-jsonp';
 import 'egg-view';
-import 'egg-validate';
 import 'egg-mongoose';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
@@ -31,7 +30,6 @@ declare module 'egg' {
 		static?: EggPluginItem;
 		jsonp?: EggPluginItem;
 		view?: EggPluginItem;
-		validate?: EggPluginItem;
 		mongoose?: EggPluginItem;
 	}
 }
