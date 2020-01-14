@@ -8,7 +8,6 @@ import ExportArticle from '../../../app/controller/article';
 import ExportCat from '../../../app/controller/cat';
 import ExportLogin from '../../../app/controller/login';
 import ExportMenu from '../../../app/controller/menu';
-import ExportNews from '../../../app/controller/news';
 import ExportPhoto from '../../../app/controller/photo';
 import ExportSoup from '../../../app/controller/soup';
 import ExportTag from '../../../app/controller/tag';
@@ -23,7 +22,6 @@ declare module 'egg' {
 		cat: ExportCat;
 		login: ExportLogin;
 		menu: ExportMenu;
-		news: ExportNews;
 		photo: ExportPhoto;
 		soup: ExportSoup;
 		tag: ExportTag;

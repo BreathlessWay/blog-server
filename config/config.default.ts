@@ -1,5 +1,5 @@
 import { Context, EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
-import { JWT_SECRET } from '../app/constants';
+import { FILE_BASE_URL_DEV, JWT_SECRET } from '../app/constants';
 
 export default (appInfo: EggAppInfo) => {
 	const config = {} as PowerPartial<EggAppConfig>;
@@ -80,6 +80,9 @@ export default (appInfo: EggAppInfo) => {
 		},
 		jwt: {
 			secret: JWT_SECRET,
+		},
+		upload: {
+			urL: FILE_BASE_URL_DEV,
 		},
 	};
 	// the return config will combines to EggAppConfig

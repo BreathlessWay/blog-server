@@ -1,7 +1,5 @@
 import { Service } from 'egg';
 
-import { FILE_BASE_URL } from '../constants';
-
 import * as uuid from 'uuid';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -9,7 +7,7 @@ import * as fs from 'fs';
 const pump = require('mz-modules/pump');
 
 export default class UploadService extends Service {
-	public async uploadFile(stream) {
+	public async uploadFile({ stream, prefix }) {
 		const filename = uuid.v1() + path.extname(stream.filename);
 		const uploadPath = path.join(this.config.baseDir, 'app/public/upload');
 		const hasUpload = fs.existsSync(uploadPath);
@@ -21,7 +19,7 @@ export default class UploadService extends Service {
 		await pump(stream, writeStream);
 
 		return {
-			url: FILE_BASE_URL + filename,
+			url: prefix + filename,
 			name: filename,
 		};
 	}

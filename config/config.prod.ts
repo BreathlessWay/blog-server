@@ -1,4 +1,5 @@
 import { EggAppConfig, PowerPartial } from 'egg';
+import { FILE_BASE_URL_PROD } from '../app/constants';
 
 export default () => {
 	const config: PowerPartial<EggAppConfig> = {};
@@ -14,6 +15,9 @@ export default () => {
 					pass: 'blog',
 				},
 			},
+		},
+		upload: {
+			urL: FILE_BASE_URL_PROD,
 		},
 	};
 	return {
