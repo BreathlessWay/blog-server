@@ -84,6 +84,9 @@ export default (appInfo: EggAppInfo) => {
 		upload: {
 			urL: FILE_BASE_URL_DEV,
 		},
+		register: {
+			support: true,
+		},
 	};
 	// the return config will combines to EggAppConfig
 	return {

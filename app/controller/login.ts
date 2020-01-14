@@ -25,19 +25,22 @@ export default class LoginController extends BaseController {
 	}
 
 	public async register() {
-		// const { ctx, service } = this;
+		const { ctx, service, config } = this;
 
 		try {
-			const email = this.ctx.request.body.email;
+			const email = ctx.request.body.email;
 			if (!this.ctx.helper.isEmail(email)) {
 				this.clientError({ msg: '不是正确的邮箱账号！' });
 				return;
 			}
-			throw new Error('暂不开放注册');
-			// await service.login.register(email);
-			// this.success({
-			// 	msg: '注册成功！',
-			// });
+			if (config.register.support) {
+				await service.login.register(email);
+				this.success({
+					msg: '注册成功！',
+				});
+			} else {
+				throw new Error('暂不开放注册');
+			}
 		} catch (e) {
 			this.fail({
 				msg: e.message,

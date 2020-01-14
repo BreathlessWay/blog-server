@@ -19,6 +19,9 @@ export default () => {
 		upload: {
 			urL: FILE_BASE_URL_PROD,
 		},
+		register: {
+			support: false,
+		},
 	};
 	return {
 		...config,
