@@ -70,7 +70,7 @@ export default (appInfo: EggAppInfo) => {
 	const bizConfig = {
 		mongoose: {
 			client: {
-				url: 'mongodb://127.0.0.1/blog-server',
+				url: 'mongodb://127.0.0.1:4444/blog-server',
 				options: {
 					useFindAndModify: false,
 					useUnifiedTopology: true,
