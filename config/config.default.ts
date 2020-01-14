@@ -75,6 +75,8 @@ export default (appInfo: EggAppInfo) => {
 					useFindAndModify: false,
 					useUnifiedTopology: true,
 					useCreateIndex: true,
+					user: 'blog',
+					pass: 'blog',
 				},
 			},
 		},
