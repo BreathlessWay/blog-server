@@ -4,8 +4,12 @@
 
 1. git config -l: 查看 git 的相关配置
 2. git config user.name/user.email: 修改提交 git 仓库的用户信息
-3. git branch `name`: 查看/创建分支
-4. git push origin `branch name`: 提交分支到远程
+3. git branch <branch name>: 查看/创建分支
+4. git push --set-upstream origin <branch name>: 提交分支到远程
+5. git branch -a: 查看所有分支，包括远程分支
+6. git branch -d <branch name>: 删除本地分支
+7. git push origin --delete <branch name>: 删除远程分支
+8. git commit --no-verify -m "--no-verify 跳过检验规则": 提交忽略验证规则
 
 > Node
 
@@ -35,24 +39,6 @@
 4. 批量更新可以循环, 或者使用[bulkWrite](http://www.mongoosejs.net/docs/api.html#bulkwrite_bulkWrite), 会批量执行`insertOne, updateOne, updateMany, replaceOne, deleteOne, and/or deleteMany`操作
 5. 从 mongodb 中查出的数据的 \_id 默认是 ObjectId, 需要通过`_id.toSting()`, 转为普通 id
 6. mongodb 获取当前查询条件下条目总数和获取当前分页需要查询两次
-
-> Nginx
-
-// TODO
-
-> Jenkins
-
-// TODO
-
-> Docker
-
-1. docker-network: 多 docker 直接通信
-2. docker 容器:
-   - client
-   - mongodb
-   - server
-3. docker-compose: 用于定义和运行多容器
-4. docker volume: 部署 Jenkins, 持续集成
 
 > 图片上传
 
