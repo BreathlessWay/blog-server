@@ -1,0 +1,8 @@
+# Created by .ignore support plugin (hsz.mobi)
+node_modules
+.git
+.idea
+run
+logs
+package-lock.json
+mongo-entrypoint

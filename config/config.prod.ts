@@ -6,7 +6,7 @@ export default () => {
 	const bizConfig = {
 		mongoose: {
 			client: {
-				url: 'mongodb://127.0.0.1:4444/blog-server',
+				url: 'mongodb://docker_compose_blog_mongodb:27017/blog-server',
 				options: {
 					useFindAndModify: false,
 					useUnifiedTopology: true,

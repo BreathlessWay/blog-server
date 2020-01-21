@@ -10,6 +10,7 @@
 6. git branch -d <branch name>: 删除本地分支
 7. git push origin --delete <branch name>: 删除远程分支
 8. git commit --no-verify -m "--no-verify 跳过检验规则": 提交忽略验证规则
+9. 185.31.16.184 github.global.ssl.fastly.net: github 慢, 或者说是它的资源 host 被堵而已, 大家可以通过简单的 hosts 映射解决
 
 > Node
 
