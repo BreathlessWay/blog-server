@@ -14,7 +14,7 @@ services:
       - docker_compose_blog_mongodb
     # 启动服务时将服务的7001端口对外映射到7001端口
     ports:
-      - '7001:7001'.
+      - 7001:7001
     # 重启
     restart: always
     networks:
