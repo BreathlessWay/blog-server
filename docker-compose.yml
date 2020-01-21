@@ -16,6 +16,8 @@ services:
     #    ports:
     #      - 7001:7001
     # 重启
+    volumes:
+      - /root/upload:/blog-server/app/public
     restart: always
     networks:
       - docker_network_server
