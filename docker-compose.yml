@@ -13,8 +13,8 @@ services:
     depends_on:
       - docker_compose_blog_mongodb
     # 启动服务时将服务的7001端口对外映射到7001端口
-    ports:
-      - '7001:7001'
+    # ports:
+    #   - '7001:7001'.
     # 重启
     restart: always
     networks:
@@ -22,6 +22,8 @@ services:
   docker_compose_blog_mongodb:
     image: mongo
     container_name: docker_container_blog_mongodb
+    # ports:
+    #   - '4444:27017'
     volumes:
       - /data/mongo/db:/data/db
       - $PWD/mongo-entrypoint:/docker-entrypoint-initdb.d
