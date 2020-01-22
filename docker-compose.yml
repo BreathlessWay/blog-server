@@ -10,15 +10,19 @@ services:
     container_name: docker_container_blog_server
     # 启动服务依赖的镜像名
     image: docker_image_blog_server
+    # 依赖的service，每次启动时要先启动mongo
     depends_on:
       - docker_compose_blog_mongodb
     # 启动服务时将服务的7001端口对外映射到7001端口
     #    ports:
     #      - 7001:7001
-    # 重启
+    # 映射上传文件的目录
     volumes:
       - /root/blog-upload:/blog-server/app/public
+    # 重启
     restart: always
+    # 加入的网络，需求在顶层networks中定义网络
+    # 需要是network的名字，不能是name
     networks:
       - docker_network_server
   docker_compose_blog_mongodb:
@@ -26,9 +30,11 @@ services:
     container_name: docker_container_blog_mongodb
     # ports:
     #   - '4444:27017'
+    # 映射数据库和启动脚本
     volumes:
       - /data/mongo/db:/data/db
       - $PWD/mongo-entrypoint:/docker-entrypoint-initdb.d
+    # 提供启动容器的环境变量，即数据的默认权限用户的用户名和密码
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
@@ -37,6 +43,9 @@ services:
     restart: always
     networks:
       - docker_network_server
+# 顶层networks声明
 networks:
   docker_network_server:
+    # 启动后显示的network的名字
+    name: docker_network_blog
     driver: bridge
