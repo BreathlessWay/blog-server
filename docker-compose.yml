@@ -19,6 +19,7 @@ services:
     # 映射上传文件的目录
     volumes:
       - /root/blog-upload:/blog-server/app/public
+      - /root/logs:/root/logs
     # 重启
     restart: always
     # 加入的网络，需求在顶层networks中定义网络
