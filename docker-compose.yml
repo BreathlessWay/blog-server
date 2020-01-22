@@ -17,7 +17,7 @@ services:
     #      - 7001:7001
     # 重启
     volumes:
-      - /root/upload:/blog-server/app/public
+      - /root/blog-upload:/blog-server/app/public
     restart: always
     networks:
       - docker_network_server
@@ -32,6 +32,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
+    # 覆盖容器启动后默认执行的命令
     command: mongod
     restart: always
     networks:
