@@ -15,7 +15,7 @@ services:
       - docker_compose_blog_mongodb
     # 启动服务时将服务的7001端口对外映射到7001端口
     ports:
-      - 7001:10001
+      - '7001:7001'
     # 映射上传文件的目录
     volumes:
       - /root/blog-upload:/blog-server/app/public
