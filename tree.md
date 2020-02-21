@@ -1,5 +1,6 @@
 ```
 .
+├── Dockerfile
 ├── README.md
 ├── agent.ts
 ├── app/
@@ -42,11 +43,7 @@
 │   │   ├── tag.ts
 │   │   └── user.ts
 │   ├── public/
-│   │   └── upload/
-│   │       ├── 19673780-36a5-11ea-bab0-6fe6e6d396de.jpeg
-│   │       └── 5fe829a0-36c1-11ea-848a-71e24c3422e7.jpg
 │   ├── router.ts
-│   ├── schedule/
 │   └── service/
 │       ├── album.ts
 │       ├── article.ts
@@ -60,12 +57,14 @@
 │       └── user.ts
 ├── app.ts
 ├── appveyor.yml
+├── build.sh
 ├── commitlint.config.js
 ├── config/
 │   ├── config.default.ts
 │   ├── config.local.ts
 │   ├── config.prod.ts
 │   └── plugin.ts
+├── docker-compose.yml
 ├── package-lock.json
 ├── package.json
 ├── test/
@@ -96,5 +95,5 @@
     │   └── plugin.d.ts
     └── index.d.ts
 
-23 directories, 72 files
+21 directories, 73 files
 ```
