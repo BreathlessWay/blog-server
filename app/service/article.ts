@@ -78,7 +78,7 @@ export default class ArticleService extends Service {
 			id,
 			{ $inc: { visit: 1 } },
 			{ new: true },
-		);
+		).populate('tags', 'name');
 	}
 
 	public async updateArticleDetail({ userId, id, detail }) {
