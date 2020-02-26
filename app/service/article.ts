@@ -46,13 +46,15 @@ export default class ArticleService extends Service {
 			params.status = status;
 		}
 
-		const count = await ctx.model.Article.find(params).countDocuments(),
+		const allCount = await ctx.model.Article.find().countDocuments(),
+			count = await ctx.model.Article.find(params).countDocuments(),
 			list = await ctx.model.Article.find(params)
 				.skip((pageIndex - 1) * pageSize)
 				.limit(pageSize)
 				.populate('tags', 'name');
 
 		return {
+			allCount,
 			count,
 			list,
 		};
