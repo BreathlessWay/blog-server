@@ -15,7 +15,7 @@ export default class TagService extends Service {
 		);
 		return tagList.map(item => {
 			const { _id, name, show, createdAt, updatedAt, count, article } = item;
-			const showCount = article.filter((item: any) => item.status);
+			const showCount = article.filter((item: any) => item.status).length;
 			return {
 				count,
 				_id,
