@@ -9,9 +9,13 @@ export type TagItemType = {
 
 export default class TagService extends Service {
 	public async getTagList() {
-		const tagList = await this.ctx.model.Tag.find();
+		const tagList = await this.ctx.model.Tag.find().populate(
+			'article',
+			'status',
+		);
 		return tagList.map(item => {
-			const { _id, name, show, createdAt, updatedAt, count } = item;
+			const { _id, name, show, createdAt, updatedAt, count, article } = item;
+			const showCount = article.filter((item: any) => item.status);
 			return {
 				count,
 				_id,
@@ -19,6 +23,7 @@ export default class TagService extends Service {
 				show,
 				createdAt,
 				updatedAt,
+				showCount,
 			};
 		});
 	}

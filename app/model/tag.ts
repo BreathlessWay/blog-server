@@ -4,6 +4,7 @@ import { Application } from 'egg';
 export interface ITagModel extends Document {
 	name: string;
 	count: number;
+	showCount: number;
 	show: boolean;
 	createdAt: string;
 	updatedAt: string;
