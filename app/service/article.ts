@@ -51,6 +51,7 @@ export default class ArticleService extends Service {
 			list = await ctx.model.Article.find(params)
 				.skip((pageIndex - 1) * pageSize)
 				.limit(pageSize)
+				.sort({ createdAt: -1 })
 				.populate('tags', 'name');
 
 		return {
@@ -78,7 +79,7 @@ export default class ArticleService extends Service {
 			id,
 			{ $inc: { visit: 1 } },
 			{ new: true },
-		).populate('tags', 'name');
+		);
 	}
 
 	public async updateArticleDetail({ userId, id, detail }) {
