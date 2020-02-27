@@ -52,7 +52,7 @@ export default class ArticleService extends Service {
 				.skip((pageIndex - 1) * pageSize)
 				.limit(pageSize)
 				.sort({ createdAt: -1 })
-				.populate('tags', 'name');
+				.populate('tags', 'name show');
 
 		return {
 			allCount,
@@ -79,7 +79,7 @@ export default class ArticleService extends Service {
 			id,
 			{ $inc: { visit: 1 } },
 			{ new: true },
-		);
+		).populate('tags', 'name show');
 	}
 
 	public async updateArticleDetail({ userId, id, detail }) {
