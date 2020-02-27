@@ -46,7 +46,9 @@ export default class ArticleService extends Service {
 			params.status = status;
 		}
 
-		const allCount = await ctx.model.Article.find().countDocuments(),
+		const allShowCount = await ctx.model.Article.find({
+				status: 1,
+			}).countDocuments(),
 			count = await ctx.model.Article.find(params).countDocuments(),
 			list = await ctx.model.Article.find(params)
 				.skip((pageIndex - 1) * pageSize)
@@ -55,7 +57,7 @@ export default class ArticleService extends Service {
 				.populate('tags', 'name show');
 
 		return {
-			allCount,
+			allShowCount,
 			count,
 			list,
 		};
