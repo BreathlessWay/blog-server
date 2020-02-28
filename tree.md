@@ -43,6 +43,7 @@
 │   │   ├── tag.ts
 │   │   └── user.ts
 │   ├── public/
+│   │   └── upload/
 │   ├── router.ts
 │   └── service/
 │       ├── album.ts
@@ -95,5 +96,5 @@
     │   └── plugin.d.ts
     └── index.d.ts
 
-21 directories, 73 files
+22 directories, 73 files
 ```
