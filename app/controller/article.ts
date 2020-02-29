@@ -200,6 +200,8 @@ export default class ArticleController extends BaseController {
 				return;
 			}
 
+			const status = ctx.request.body.status;
+
 			await service.article.batchUpdateArticle({
 				userId,
 				ids,
