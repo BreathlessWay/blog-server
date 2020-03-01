@@ -21,6 +21,7 @@ export interface IArticleModel extends Document {
 	status: EArticleStatus;
 	renderType: EArticleRenderType;
 	tags: Array<string>;
+	top: boolean;
 }
 
 const ArticleModel = (app: Application): Model<IArticleModel> => {
@@ -50,6 +51,10 @@ const ArticleModel = (app: Application): Model<IArticleModel> => {
 			},
 			tags: [{ type: Schema.Types.ObjectId, ref: 'Tag' }],
 			userId: { type: Schema.Types.ObjectId, ref: 'Login' },
+			top: {
+				type: Boolean,
+				default: false,
+			},
 		},
 		{
 			timestamps: true,

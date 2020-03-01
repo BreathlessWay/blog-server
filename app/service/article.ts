@@ -51,9 +51,9 @@ export default class ArticleService extends Service {
 			}).countDocuments(),
 			count = await ctx.model.Article.find(params).countDocuments(),
 			list = await ctx.model.Article.find(params)
+				.sort({ createdAt: -1, top: -1 })
 				.skip((pageIndex - 1) * pageSize)
 				.limit(pageSize)
-				.sort({ createdAt: -1 })
 				.populate('tags', 'name show');
 
 		return {
