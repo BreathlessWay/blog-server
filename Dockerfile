@@ -7,6 +7,7 @@ RUN mkdir -p blog-server
 WORKDIR /blog-server
 # 将package.json npmrc拷贝到镜像中
 COPY package.json /blog-server/package.json
+COPY package-lock.json /blog-server/package-lock.json
 COPY .npmrc /blog-server/.npmrc
 # 安装npm依赖
 RUN npm i
