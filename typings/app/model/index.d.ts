@@ -10,6 +10,7 @@ import ExportImage from '../../../app/model/image';
 import ExportLogin from '../../../app/model/login';
 import ExportMenu from '../../../app/model/menu';
 import ExportPhoto from '../../../app/model/photo';
+import ExportSoup from '../../../app/model/soup';
 import ExportTag from '../../../app/model/tag';
 import ExportUser from '../../../app/model/user';
 
@@ -23,6 +24,7 @@ declare module 'egg' {
 		Login: ReturnType<typeof ExportLogin>;
 		Menu: ReturnType<typeof ExportMenu>;
 		Photo: ReturnType<typeof ExportPhoto>;
+		Soup: ReturnType<typeof ExportSoup>;
 		Tag: ReturnType<typeof ExportTag>;
 		User: ReturnType<typeof ExportUser>;
 	}

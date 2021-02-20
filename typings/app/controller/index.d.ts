@@ -2,9 +2,9 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
-import ExportBaseController from '../../../app/controller/BaseController';
 import ExportAlbum from '../../../app/controller/album';
 import ExportArticle from '../../../app/controller/article';
+import ExportBaseController from '../../../app/controller/BaseController';
 import ExportCat from '../../../app/controller/cat';
 import ExportLogin from '../../../app/controller/login';
 import ExportMenu from '../../../app/controller/menu';
@@ -16,9 +16,9 @@ import ExportUser from '../../../app/controller/user';
 
 declare module 'egg' {
 	interface IController {
-		baseController: ExportBaseController;
 		album: ExportAlbum;
 		article: ExportArticle;
+		baseController: ExportBaseController;
 		cat: ExportCat;
 		login: ExportLogin;
 		menu: ExportMenu;

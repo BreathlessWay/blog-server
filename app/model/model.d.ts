@@ -9,6 +9,7 @@ import { ICatFigureItemModel } from './catFigure';
 import { ICatListItemModel } from './catList';
 import { IAlbumModel } from './album';
 import { IPhotoModel } from './photo';
+import { ISoupModel } from './soup';
 
 declare module 'egg' {
 	interface Context {
@@ -22,6 +23,7 @@ declare module 'egg' {
 			CatList: Model<ICatListItemModel>;
 			Album: Model<IAlbumModel>;
 			Photo: Model<IPhotoModel>;
+			Soup: Model<ISoupModel>;
 		};
 	}
 }
